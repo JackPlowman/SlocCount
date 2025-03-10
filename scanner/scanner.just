@@ -56,3 +56,11 @@ ruff-format-check:
 # Fix Ruff format issues
 ruff-format-fix:
     uv run ruff format .
+
+# ------------------------------------------------------------------------------
+# Other Python Tools
+# ------------------------------------------------------------------------------
+
+# Check for unused code
+vulture:
+    uv run vulture .
