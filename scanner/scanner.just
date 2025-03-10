@@ -33,13 +33,13 @@ unit-test-debug:
 
 # Fix all Ruff issues
 ruff-fix:
-    just ruff-format-fix
-    just ruff-lint-fix
+    just scanner::ruff-format-fix
+    just scanner::ruff-lint-fix
 
 # Check for all Ruff issues
 ruff-checks:
-    just ruff-format-check
-    just ruff-lint-check
+    just scanner::ruff-format-check
+    just scanner::ruff-lint-check
 
 # Check for Ruff issues
 ruff-lint-check:
