@@ -1,5 +1,5 @@
-def main():
-    print("Hello from sloccount!")
+def main() -> None:  # noqa: D103
+    print("Hello from sloccount!")  # noqa: T201
 
 
 if __name__ == "__main__":
