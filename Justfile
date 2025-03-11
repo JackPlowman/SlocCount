@@ -1,4 +1,5 @@
 mod scanner 'scanner/scanner.just'
+mod diagrams 'diagrams/diagrams.just'
 
 # ------------------------------------------------------------------------------
 # Prettier
@@ -20,11 +21,13 @@ prettier-format:
 format:
     just --fmt --unstable
     just --fmt --unstable --justfile scanner/scanner.just
+    just --fmt --unstable --justfile diagrams/diagrams.just
 
 # Check Justfile formatting
 format-check:
     just --fmt --check --unstable
     just --fmt --check --unstable --justfile scanner/scanner.just
+    just --fmt --check --unstable --justfile diagrams/diagrams.just
 
 # ------------------------------------------------------------------------------
 # Gitleaks

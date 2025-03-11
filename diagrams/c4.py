@@ -1,15 +1,10 @@
-# /// script
-# requires-python = ">=3.13"
-# dependencies = ["diagrams==0.24.4"]
-# ///
-
 from diagrams import Diagram
 from diagrams.c4 import (
-    Person,
     Container,
     Database,
-    SystemBoundary,
+    Person,
     Relationship,
+    SystemBoundary,
 )
 
 with Diagram("../docs/diagrams/c4", direction="TB", graph_attr={"splines": "spline"}):
