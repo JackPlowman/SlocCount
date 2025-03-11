@@ -197,3 +197,44 @@ jobs:
           RUFF_OUTPUT_FORMAT: "github"
       - name: Check Python Code for Dead Code (Vulture)
         run: just scanner::vulture
+
+  run-diagrams-python-code-checks:
+    name: Run Diagrams Python Code Checks
+    runs-on: ubuntu-latest
+    permissions:
+      statuses: write
+      security-events: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Python and UV
+        uses: astral-sh/setup-uv@v5.3.1
+        with:
+          pyproject-file: "pyproject.toml"
+          enable-cache: true
+      - name: Set up Just
+        uses: extractions/setup-just@v2
+      - name: Install Python Dependencies
+        run: just diagrams::install
+      - name: Generate Ruff Sarif
+        run: just diagrams::ruff-lint-check
+        env:
+          RUFF_OUTPUT_FORMAT: "sarif"
+          RUFF_OUTPUT_FILE: "ruff-results.sarif"
+        continue-on-error: true
+      - name: Upload Ruff analysis results to GitHub
+        uses: github/codeql-action/upload-sarif@v3.28.10
+        with:
+          sarif_file: diagrams/ruff-results.sarif
+          wait-for-processing: true
+      - name: Check Python Code Format (Ruff)
+        run: just diagrams::ruff-format-check
+        env:
+          RUFF_OUTPUT_FORMAT: "github"
+      - name: Check Python Code Linting (Ruff)
+        run: just diagrams::ruff-lint-check
+        env:
+          RUFF_OUTPUT_FORMAT: "github"
