@@ -96,12 +96,17 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Install the latest version of uv
+      - name: Install Python and UV
         uses: astral-sh/setup-uv@v5.3.1
         with:
-          version: "latest"
+          pyproject-file: "pyproject.toml"
+          enable-cache: true
+      - name: Set up Just
+        uses: extractions/setup-just@v2
+      - name: Install Python Dependencies
+        run: just scanner::install
       - name: Run zizmor 🌈
-        run: uvx zizmor --format sarif . > results.sarif
+        run: uv --project scanner run zizmor --format sarif . > results.sarif
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload SARIF file
