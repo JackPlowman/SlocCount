@@ -8,11 +8,11 @@ install:
 
 # Run the analyser
 run:
-    uv run python -m main.py
+    uv run python -m app
 
 # Run the analyser with default values
 run-with-defaults:
-    INPUT_DEBUG=true INPUT_REPOSITORY_OWNER=JackPlowman uv run python main.py
+    INPUT_DEBUG=true INPUT_REPOSITORY_OWNER=JackPlowman uv run python -m app
 
 # ------------------------------------------------------------------------------
 # Test Commands
@@ -20,11 +20,11 @@ run-with-defaults:
 
 # Run unit tests
 unit-test:
-    uv run pytest . --cov=. --cov-report=xml
+    uv run pytest app --cov=. --cov-report=xml
 
 # Run unit tests with debug output
 unit-test-debug:
-    uv run pytest . --cov=. --cov-report=xml -vvvv
+    uv run pytest app --cov=. --cov-report=xml -vvvv
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
@@ -43,19 +43,19 @@ ruff-checks:
 
 # Check for Ruff issues
 ruff-lint-check:
-    uv run ruff check .
+    uv run ruff check app
 
 # Fix Ruff lint issues
 ruff-lint-fix:
-    uv run ruff check . --fix
+    uv run ruff check app --fix
 
 # Check for Ruff format issues
 ruff-format-check:
-    uv run ruff format --check .
+    uv run ruff format --check app
 
 # Fix Ruff format issues
 ruff-format-fix:
-    uv run ruff format .
+    uv run ruff format app
 
 # ------------------------------------------------------------------------------
 # Other Python Tools
@@ -63,4 +63,4 @@ ruff-format-fix:
 
 # Check for unused code
 vulture:
-    uv run vulture .
+    uv run vulture app
