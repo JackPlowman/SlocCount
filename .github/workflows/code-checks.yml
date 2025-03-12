@@ -155,6 +155,27 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3.28.10
 
+  unit-tests:
+    name: Run Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install Python and UV
+        uses: astral-sh/setup-uv@v5.3.1
+        with:
+          pyproject-file: "pyproject.toml"
+          enable-cache: true
+      - name: Set up Just
+        uses: extractions/setup-just@v2
+      - name: Install Python Dependencies
+        run: just scanner::install
+      - name: Run Unit Tests
+        run: just scanner::unit-test
+
   run-scanner-python-code-checks:
     name: Run Scanner Python Code Checks
     runs-on: ubuntu-latest
