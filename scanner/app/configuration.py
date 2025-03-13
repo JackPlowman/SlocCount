@@ -12,8 +12,8 @@ class Configuration:
 
     def __init__(self: Self) -> None:
         """Initialise the configuration."""
-        self.repository_owner = self.get_and_check_for_value("INPUT_REPOSITORY_OWNER")
-        self.github_token = self.get_and_check_for_value("INPUT_GITHUB_TOKEN")
+        self.repository_owner = self.get_and_check_for_value("REPOSITORY_OWNER")
+        self.github_token = self.get_and_check_for_value("GITHUB_TOKEN")
 
     def get_and_check_for_value(self: Self, key: str) -> str:
         """Get a value from the configuration and check it has been set.
