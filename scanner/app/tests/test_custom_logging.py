@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import pytest
 
-from app.custom_logging import set_up_custom_logging
+from scanner.app.custom_logging import set_up_custom_logging
 
 
 @pytest.mark.parametrize(("debug_env"), [("false"), ("true")])
