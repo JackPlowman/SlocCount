@@ -174,5 +174,5 @@ cython_debug/
 .pypirc
 
 # Custom
-cloned_directories/*
-!cloned_directories/.gitkeep
+cloned_repositories/*
+!cloned_repositories/.gitkeep
