@@ -20,11 +20,11 @@ run-with-defaults:
 
 # Run unit tests
 unit-test:
-    uv run pytest app --cov=app --cov-report=xml
+    uv run pytest app --cov=. --cov-report=xml
 
 # Run unit tests with debug output
 unit-test-debug:
-    uv run pytest app --cov=app --cov-report=xml -vvvv
+    uv run pytest app --cov=. --cov-report=xml -vvvv
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
