@@ -1,5 +1,6 @@
 from pathlib import Path
 from shutil import rmtree
+
 from structlog import get_logger, stdlib
 
 from .configuration import Configuration
@@ -33,6 +34,7 @@ def run_analyser(configuration: Configuration) -> None:
         owner_name, repository_name = repository.owner.login, repository.name
         clone_repo(owner_name, repository_name)
 
+
 def clean_up() -> None:
     """Clean up the cloned repositories."""
     logger.debug("Cleaning up cloned repositories")
@@ -40,5 +42,7 @@ def clean_up() -> None:
     for repository in cloned_repositories.iterdir():
         if repository.is_dir():
             rmtree(repository)
+
+
 if __name__ == "__main__":
     main()
