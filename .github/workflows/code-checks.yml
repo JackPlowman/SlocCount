@@ -264,3 +264,18 @@ jobs:
         run: just diagrams::ruff-lint-check
         env:
           RUFF_OUTPUT_FORMAT: "github"
+
+  run-code-limit:
+    name: Run CodeLimit
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: "Run Code Limit"
+        uses: getcodelimit/codelimit-action@v1
