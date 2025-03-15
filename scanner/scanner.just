@@ -12,7 +12,7 @@ run:
 
 # Run the analyser with default values
 run-with-defaults:
-    INPUT_DEBUG=true INPUT_REPOSITORY_OWNER=JackPlowman uv run python -m app
+    REPOSITORY_OWNER=JackPlowman uv run python -m app
 
 # ------------------------------------------------------------------------------
 # Test Commands
