@@ -1,0 +1,119 @@
+{
+  "version": "0.18.1",
+  "uuid": "fe4c5e13-f33b-48d2-a913-e26850019db5",
+  "timestamp": "2025-03-15T09:12:08+00:00",
+  "root": "/github/workspace",
+  "repository": {
+    "owner": "JackPlowman",
+    "name": "SlocCount",
+    "branch": "codelimit"
+  },
+  "codebase": {
+    "totals": {
+      "Python": {
+        "files": 7,
+        "lines_of_code": 52,
+        "functions": 7,
+        "hard_to_maintain": 0,
+        "unmaintainable": 0
+      }
+    },
+    "tree": {
+      "./": {
+        "entries": [
+          "diagrams/",
+          "scanner/"
+        ],
+        "profile": [52, 0, 0, 0]
+      },
+      "diagrams/": {
+        "entries": [
+          "c4.py"
+        ],
+        "profile": [0, 0, 0, 0]
+      },
+      "scanner/": {
+        "entries": [
+          "__init__.py",
+          "app/"
+        ],
+        "profile": [52, 0, 0, 0]
+      },
+      "scanner/app/": {
+        "entries": [
+          "__main__.py",
+          "configuration.py",
+          "github_interactions.py",
+          "custom_logging.py",
+          "__init__.py"
+        ],
+        "profile": [52, 0, 0, 0]
+      }
+    },
+    "files": {
+      "diagrams/c4.py": {
+        "checksum": "e019775dd2947c4f2dce9a35d44f5c38",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "scanner/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      },
+      "scanner/app/__main__.py": {
+        "checksum": "11e44bec1e2d2efe81bced183d38f727",
+        "language": "Python",
+        "loc": 12,
+        "profile": [12, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "main", "start": {"line": 10, "column": 1}, "end": {"line": 15, "column": 36}, "value": 6},
+          {"unit_name": "run_analyser", "start": {"line": 18, "column": 1}, "end": {"line": 26, "column": 48}, "value": 6}
+        ]
+      },
+      "scanner/app/configuration.py": {
+        "checksum": "d064f5858331fb90515c729dc0a009c1",
+        "language": "Python",
+        "loc": 12,
+        "profile": [12, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "__init__", "start": {"line": 13, "column": 5}, "end": {"line": 16, "column": 73}, "value": 4},
+          {"unit_name": "get_and_check_for_value", "start": {"line": 18, "column": 5}, "end": {"line": 32, "column": 30}, "value": 8}
+        ]
+      },
+      "scanner/app/github_interactions.py": {
+        "checksum": "69abe9d0ade89396f37ab7356edbf460",
+        "language": "Python",
+        "loc": 22,
+        "profile": [22, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "clone_repo", "start": {"line": 16, "column": 1}, "end": {"line": 35, "column": 21}, "value": 10},
+          {"unit_name": "retrieve_repositories", "start": {"line": 38, "column": 1}, "end": {"line": 53, "column": 24}, "value": 12}
+        ]
+      },
+      "scanner/app/custom_logging.py": {
+        "checksum": "30c4784bd5938c3b9025cab1e7ead5f6",
+        "language": "Python",
+        "loc": 6,
+        "profile": [6, 0, 0, 0],
+        "measurements": [
+          {"unit_name": "set_up_custom_logging", "start": {"line": 9, "column": 1}, "end": {"line": 14, "column": 64}, "value": 6}
+        ]
+      },
+      "scanner/app/__init__.py": {
+        "checksum": "d41d8cd98f00b204e9800998ecf8427e",
+        "language": "Python",
+        "loc": 0,
+        "profile": [0, 0, 0, 0],
+        "measurements": [
+        ]
+      }
+    }
+  }
+}
