@@ -96,15 +96,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Install Python and UV
-        uses: astral-sh/setup-uv@v5.3.1
-        with:
-          pyproject-file: "pyproject.toml"
-          enable-cache: true
-      - name: Set up Just
-        uses: extractions/setup-just@v2
-      - name: Install Python Dependencies
-        run: just scanner::install
+      - name: Setup Scanner Dependencies
+        uses: ./.github/actions/setup-scanner-dependencies
       - name: Run zizmor 🌈
         run: uv --project scanner run zizmor --format sarif . > results.sarif
         env:
@@ -164,15 +157,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Install Python and UV
-        uses: astral-sh/setup-uv@v5.3.1
-        with:
-          pyproject-file: "pyproject.toml"
-          enable-cache: true
-      - name: Set up Just
-        uses: extractions/setup-just@v2
-      - name: Install Python Dependencies
-        run: just scanner::install
+      - name: Setup Scanner Dependencies
+        uses: ./.github/actions/setup-scanner-dependencies
       - name: Run Unit Tests
         run: just scanner::unit-test
       - name: SonarCloud Scan
@@ -193,15 +179,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Install Python and UV
-        uses: astral-sh/setup-uv@v5.3.1
-        with:
-          pyproject-file: "pyproject.toml"
-          enable-cache: true
-      - name: Set up Just
-        uses: extractions/setup-just@v2
-      - name: Install Python Dependencies
-        run: just scanner::install
+      - name: Setup Scanner Dependencies
+        uses: ./.github/actions/setup-scanner-dependencies
       - name: Generate Ruff Sarif
         run: just scanner::ruff-lint-check
         env:
@@ -236,15 +215,8 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      - name: Install Python and UV
-        uses: astral-sh/setup-uv@v5.3.1
-        with:
-          pyproject-file: "pyproject.toml"
-          enable-cache: true
-      - name: Set up Just
-        uses: extractions/setup-just@v2
-      - name: Install Python Dependencies
-        run: just diagrams::install
+      - name: Setup Diagrams Dependencies
+        uses: ./.github/actions/setup-diagrams-dependencies
       - name: Generate Ruff Sarif
         run: just diagrams::ruff-lint-check
         env:
