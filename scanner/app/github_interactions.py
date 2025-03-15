@@ -29,6 +29,12 @@ def clone_repo(owner_name: str, repository_name: str) -> str:
     if not Path.exists(Path(file_path)):
         repo_url = f"https://github.com/{owner_name}/{repository_name}.git"
         Repo.clone_from(repo_url, Path(file_path))
+        logger.info(
+            "Cloned repository",
+            owner_name=owner_name,
+            repository_name=repository_name,
+            file_path=f"{file_path}/.git",
+        )
         logger.debug(
             "Cloned repository", owner_name=owner_name, repository_name=repository_name
         )
