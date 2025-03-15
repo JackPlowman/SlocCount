@@ -2,11 +2,11 @@ from pathlib import Path
 
 from git import rmtree
 from structlog import get_logger, stdlib
-
+from os import walk
 from .configuration import Configuration
 from .custom_logging import set_up_custom_logging
 from .github_interactions import clone_repo, retrieve_repositories
-
+from pygount import SourceAnalysis, ProjectSummary
 logger: stdlib.BoundLogger = get_logger()
 
 
@@ -32,8 +32,24 @@ def run_analyser(configuration: Configuration) -> None:
     repositories = retrieve_repositories(configuration)
     for repository in repositories:
         owner_name, repository_name = repository.owner.login, repository.name
-        clone_repo(owner_name, repository_name)
+        folder_path=clone_repo(owner_name, repository_name)
+        project_summary = ProjectSummary()
+        iterator = Path(folder_path).walk()
+        for _root, _dirs, files in iterator:
+            for file in files:
+                file_path = f"{_root.__str__()}/{file}"
+                logger.debug("Analysing file", file=file_path)
+                file_analysis = SourceAnalysis.from_file(file_path, repository_name)
+                logger.debug("File analysis", file_analysis=file_analysis)
+                if file_analysis.language not in ["__unknown__", "__empty__", "__error__"]:
+                    project_summary.add(file_analysis)
+        logger.info("Project summary", project_summary=project_summary)
 
+        # for source_path in walk(folder_path):
+        #     source_analysis = SourceAnalysis.from_file(source_path, "pygount")
+        #     project_summary.add(source_analysis)
+        # for language_summary in project_summary.language_to_language_summary_map.values():
+        #     logger.info(language_summary)
 
 def clean_up() -> None:
     """Clean up the cloned repositories."""
