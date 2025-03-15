@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "a77acb26-0788-45d8-85de-3ebf299cbccf",
-  "timestamp": "2025-03-15T19:46:50+00:00",
+  "uuid": "6f17c6a0-e62a-4209-8322-7fcfd2f37a14",
+  "timestamp": "2025-03-15T19:47:25+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -68,14 +68,14 @@
         ]
       },
       "scanner/app/__main__.py": {
-        "checksum": "a12225a18882a4621036a13bbcc148eb",
+        "checksum": "42ee125a3e6dbaf8a92c565923f293a1",
         "language": "Python",
         "loc": 25,
         "profile": [25, 0, 0, 0],
         "measurements": [
           {"unit_name": "main", "start": {"line": 13, "column": 1}, "end": {"line": 24, "column": 36}, "value": 12},
           {"unit_name": "run_analyser", "start": {"line": 27, "column": 1}, "end": {"line": 35, "column": 48}, "value": 6},
-          {"unit_name": "clean_up", "start": {"line": 38, "column": 1}, "end": {"line": 45, "column": 31}, "value": 7}
+          {"unit_name": "clean_up", "start": {"line": 38, "column": 1}, "end": {"line": 44, "column": 31}, "value": 7}
         ]
       },
       "scanner/app/configuration.py": {
