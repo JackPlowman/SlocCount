@@ -1,8 +1,8 @@
 from pathlib import Path
-from os import chmod, path, walk
-from stat import S_IRWXU
-from structlog import get_logger, stdlib
+
 from git import rmtree
+from structlog import get_logger, stdlib
+
 from .configuration import Configuration
 from .custom_logging import set_up_custom_logging
 from .github_interactions import clone_repo, retrieve_repositories
@@ -38,7 +38,6 @@ def run_analyser(configuration: Configuration) -> None:
 def clean_up() -> None:
     """Clean up the cloned repositories."""
     logger.debug("Cleaning up cloned repositories")
-
     cloned_repositories = Path("cloned_repositories")
     for repository in cloned_repositories.iterdir():
         if repository.is_dir():
