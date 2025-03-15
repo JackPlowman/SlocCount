@@ -19,7 +19,8 @@ updates:
 
   - package-ecosystem: "uv"
     directories:
-      - "/"
+      - "/scanner"
+      - "/diagrams"
     schedule:
       interval: "daily"
       time: "01:00"
