@@ -12,4 +12,5 @@ runs:
     - name: Set up Just
       uses: extractions/setup-just@v2
     - name: Install Python Dependencies
+      shell: bash
       run: just diagrams::install
