@@ -21,6 +21,7 @@ updates:
     directories:
       - "/scanner"
       - "/diagrams"
+      - "/tests"
     schedule:
       interval: "daily"
       time: "01:00"
