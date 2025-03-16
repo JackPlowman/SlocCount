@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "88cf85ba-5e2f-44b0-b036-31d6e5b2ed2f",
-  "timestamp": "2025-03-16T06:44:30+00:00",
+  "uuid": "757b1105-8119-441b-b4da-e9868832d203",
+  "timestamp": "2025-03-16T11:54:39+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -69,7 +69,7 @@
         ]
       },
       "scanner/app/__main__.py": {
-        "checksum": "526f9acda714cbeea95cc86226465237",
+        "checksum": "3dfe1ca8cf3c2242ba76b4dc5cd69d70",
         "language": "Python",
         "loc": 55,
         "profile": [31, 24, 0, 0],
