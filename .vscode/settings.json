@@ -1,0 +1,7 @@
+{
+  "search.exclude": {
+    "*/.pytest_cache/*": true,
+    "*/__pycache__/*": true,
+    "scanner/cloned_repositories/*": true,
+  }
+}
