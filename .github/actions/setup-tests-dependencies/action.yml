@@ -1,0 +1,16 @@
+name: "Setup Scanner Dependencies"
+description: "Installs the dependencies for the scanner"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install Python and UV
+      uses: astral-sh/setup-uv@v5.3.1
+      with:
+        pyproject-file: "scanner/pyproject.toml"
+        enable-cache: true
+    - name: Set up Just
+      uses: extractions/setup-just@v2
+    - name: Install Python Dependencies
+      shell: bash
+      run: just scanner::install
