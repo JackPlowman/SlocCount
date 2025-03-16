@@ -1,5 +1,0 @@
-Metadata-Version: 2.2
-Name: scanner
-Version: 0.0.0
-Requires-Python: >=3.13
-Requires-Dist: check-jsonschema==0.31.0
