@@ -1,3 +1,4 @@
+from json import dump
 from pathlib import Path
 
 from git import rmtree
@@ -6,6 +7,7 @@ from structlog import get_logger, stdlib
 
 from .configuration import Configuration
 from .custom_logging import set_up_custom_logging
+from .custom_types import AnalysedRepository
 from .github_interactions import clone_repo, retrieve_repositories
 
 logger: stdlib.BoundLogger = get_logger()
@@ -31,6 +33,7 @@ def run_analyser(configuration: Configuration) -> None:
     This function is a placeholder for the actual analysis logic.
     """
     repositories = retrieve_repositories(configuration)
+    analysis: list[AnalysedRepository] = []
     for repository in repositories:
         owner_name, repository_name = repository.owner.login, repository.name
         folder_path = clone_repo(owner_name, repository_name)
@@ -48,7 +51,23 @@ def run_analyser(configuration: Configuration) -> None:
                     "__error__",
                 ]:
                     project_summary.add(file_analysis)
+        analysis.append({"name": repository_name, "summary": project_summary})
         logger.info("Project summary", project_summary=project_summary)
+    generate_output(analysis)
+
+
+def generate_output(analysis: list[AnalysedRepository]) -> None:
+    """Generate output from the analysis."""
+    total_code_lines = sum(repository.code_count for repository in analysis)
+    total_files = sum(repository.file_count for repository in analysis)
+    dict_to_json = {
+        "total": {
+            "lines": total_code_lines,
+            "files": total_files,
+        }
+    }
+    with Path("output.json").open("w", encoding="utf-8") as file:
+        dump(dict_to_json, file, indent=4, ensure_ascii=False)
 
 
 def clean_up() -> None:
