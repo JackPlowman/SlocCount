@@ -14,13 +14,8 @@
           "type": "integer"
         }
       },
-      "required": [
-        "lines",
-        "files"
-      ]
+      "required": ["lines", "files"]
     }
   },
-  "required": [
-    "total"
-  ]
+  "required": ["total"]
 }
