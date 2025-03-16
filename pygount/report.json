@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "a5208703-e231-4b46-8416-85e4b8cf26db",
-  "timestamp": "2025-03-15T20:09:10+00:00",
+  "uuid": "be24d9e1-79a6-4c5f-9090-289eaa4ee88e",
+  "timestamp": "2025-03-16T06:05:36+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -12,7 +12,7 @@
     "totals": {
       "Python": {
         "files": 7,
-        "lines_of_code": 76,
+        "lines_of_code": 80,
         "functions": 8,
         "hard_to_maintain": 0,
         "unmaintainable": 0
@@ -24,7 +24,7 @@
           "diagrams/",
           "scanner/"
         ],
-        "profile": [59, 17, 0, 0]
+        "profile": [59, 21, 0, 0]
       },
       "diagrams/": {
         "entries": [
@@ -37,7 +37,7 @@
           "__init__.py",
           "app/"
         ],
-        "profile": [59, 17, 0, 0]
+        "profile": [59, 21, 0, 0]
       },
       "scanner/app/": {
         "entries": [
@@ -47,7 +47,7 @@
           "custom_logging.py",
           "__init__.py"
         ],
-        "profile": [59, 17, 0, 0]
+        "profile": [59, 21, 0, 0]
       }
     },
     "files": {
@@ -68,13 +68,13 @@
         ]
       },
       "scanner/app/__main__.py": {
-        "checksum": "743dd484258c5a385c14968eecc92343",
+        "checksum": "03f3874338ebd456aa9414b0cfe961b1",
         "language": "Python",
-        "loc": 36,
-        "profile": [19, 17, 0, 0],
+        "loc": 40,
+        "profile": [19, 21, 0, 0],
         "measurements": [
-          {"unit_name": "main", "start": {"line": 13, "column": 1}, "end": {"line": 24, "column": 36}, "value": 12},
-          {"unit_name": "run_analyser", "start": {"line": 27, "column": 1}, "end": {"line": 46, "column": 72}, "value": 17},
+          {"unit_name": "main", "start": {"line": 14, "column": 1}, "end": {"line": 25, "column": 36}, "value": 12},
+          {"unit_name": "run_analyser", "start": {"line": 28, "column": 1}, "end": {"line": 51, "column": 72}, "value": 21},
           {"unit_name": "clean_up", "start": {"line": 54, "column": 1}, "end": {"line": 60, "column": 31}, "value": 7}
         ]
       },
