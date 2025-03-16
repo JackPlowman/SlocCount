@@ -75,8 +75,14 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
     """Test the generate_output function."""
     # Arrange
     analysis: list[AnalysedRepository] = [
-        {"name": "repo1", "summary": MagicMock(code_count=100, file_count=10)},
-        {"name": "repo2", "summary": MagicMock(code_count=200, file_count=20)},
+        {
+            "name": "repo1",
+            "summary": MagicMock(total_line_count=100, total_file_count=10),
+        },
+        {
+            "name": "repo2",
+            "summary": MagicMock(total_line_count=200, total_file_count=20),
+        },
     ]
     mock_file = MagicMock()
     mock_path.return_value.open.return_value.__enter__.return_value = mock_file

@@ -58,7 +58,9 @@ def run_analyser(configuration: Configuration) -> None:
 
 def generate_output(analysis: list[AnalysedRepository]) -> None:
     """Generate output from the analysis."""
-    total_code_lines = sum(repository["summary"].total_line_count for repository in analysis)
+    total_code_lines = sum(
+        repository["summary"].total_line_count for repository in analysis
+    )
     total_files = sum(repository["summary"].total_file_count for repository in analysis)
     dict_to_json = {
         "total": {
