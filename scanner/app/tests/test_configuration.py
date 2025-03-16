@@ -1,5 +1,7 @@
 from os import environ
 
+import pytest
+
 from scanner.app.configuration import Configuration
 
 
@@ -14,3 +16,14 @@ def test_configuration() -> None:
     # Clean Up
     del environ["REPOSITORY_OWNER"]
     del environ["GITHUB_TOKEN"]
+
+
+def test_configuration_missing_value() -> None:
+    # Arrange
+    environ.pop("REPOSITORY_OWNER", None)
+    environ.pop("GITHUB_TOKEN", None)
+    # Act & Assert
+    with pytest.raises(
+        ValueError, match="Configuration value for REPOSITORY_OWNER is not set"
+    ):
+        Configuration()
