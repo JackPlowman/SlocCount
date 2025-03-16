@@ -4,6 +4,9 @@ updates:
   - package-ecosystem: "github-actions"
     directories:
       - "/"
+      - ".github/actions/setup-scanner-dependencies"
+      - ".github/actions/setup-diagrams-dependencies"
+      - ".github/actions/setup-tests-dependencies"
     schedule:
       interval: "daily"
       time: "01:00"
