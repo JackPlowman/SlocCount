@@ -202,6 +202,8 @@ jobs:
           RUFF_OUTPUT_FORMAT: "github"
       - name: Check Python Code for Dead Code (Vulture)
         run: just scanner::vulture
+      - name: UV Lock Check
+        run: just scanner::uv-lock-check
 
   run-diagrams-python-code-checks:
     name: Run Diagrams Python Code Checks
@@ -236,6 +238,8 @@ jobs:
         run: just diagrams::ruff-lint-check
         env:
           RUFF_OUTPUT_FORMAT: "github"
+      - name: UV Lock Check
+        run: just diagrams::uv-lock-check
 
   run-code-limit:
     name: Run CodeLimit
