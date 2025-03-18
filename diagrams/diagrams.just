@@ -40,3 +40,10 @@ ruff-format-check:
 # Fix Ruff format issues
 ruff-format-fix:
     uv run ruff format .
+
+# ------------------------------------------------------------------------------
+# UV
+# ------------------------------------------------------------------------------
+
+uv-lock-check:
+    uv lock --check
