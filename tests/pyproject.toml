@@ -2,12 +2,8 @@
 name = "scanner"
 dynamic = ["version"]
 requires-python = ">=3.13"
-dependencies = [
-  "check-jsonschema==0.31.0"
-]
+dependencies = ["check-jsonschema==0.31.0"]
 
 [tool.uv]
-required-version = "0.6.6"
+required-version = "0.6.8"
 package = false
-
-
