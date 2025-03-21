@@ -44,7 +44,7 @@ wheels = [
 
 [[package]]
 name = "check-jsonschema"
-version = "0.31.0"
+version = "0.31.3"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -53,9 +53,9 @@ dependencies = [
     { name = "requests" },
     { name = "ruamel-yaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/c6/62/4e2291834222dceab6f16d65bc6cc8cf601682687dd998aca0ba244cc7b6/check_jsonschema-0.31.0.tar.gz", hash = "sha256:fdcab9feaa5314e4187c4121558945b43ad70e046d1bbb149c6dcbfab488bf6d", size = 270709 }
+sdist = { url = "https://files.pythonhosted.org/packages/5c/68/a2c997e461be3e6d5d70130759ceba14dedcac565c7d1458e568cc6ec5f1/check_jsonschema-0.31.3.tar.gz", hash = "sha256:760b14fd3b1866363ae4886a8ce00dbc2e117abc995e4390c5071aeb3ac00910", size = 275814 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/df/ba/1411bdfee3873fab2efb9539aa8e07843d68d8fcc2738554c2417be6ed28/check_jsonschema-0.31.0-py3-none-any.whl", hash = "sha256:5e500b495fdd1b18feb810cd32ef9f0d52703782ff80223e09a114a605053107", size = 256646 },
+    { url = "https://files.pythonhosted.org/packages/6f/5c/e3729ede5aa7c6f23e99b449c33ff2e9eda06b6b9aec26b5d74e029ca8d9/check_jsonschema-0.31.3-py3-none-any.whl", hash = "sha256:061470dbe7b37cf170fbd0bc503dc4e49e5a75aaf7b948d66fd1464c4519d383", size = 261374 },
 ]
 
 [[package]]
@@ -200,11 +200,11 @@ wheels = [
 
 [[package]]
 name = "ruamel-yaml"
-version = "0.18.7"
+version = "0.18.10"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/be/f6/ae958c14677098f4fcc0a6b04b382c02f31ec628d2b03910e24f29d9bc58/ruamel.yaml-0.18.7.tar.gz", hash = "sha256:270638acec6659f7bb30f4ea40083c9a0d0d5afdcef5e63d666f11209091531a", size = 142349 }
+sdist = { url = "https://files.pythonhosted.org/packages/ea/46/f44d8be06b85bc7c4d8c95d658be2b68f27711f279bf9dd0612a5e4794f5/ruamel.yaml-0.18.10.tar.gz", hash = "sha256:20c86ab29ac2153f80a428e1254a8adf686d3383df04490514ca3b79a362db58", size = 143447 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ee/04/9fe08b3cc8000c1d98f2f79811d99caf992643f5d5510b5e64547659e808/ruamel.yaml-0.18.7-py3-none-any.whl", hash = "sha256:adef56d72a97bc2a6a78952ef398c4054f248fba5698ddc3ab07434e7fc47983", size = 116931 },
+    { url = "https://files.pythonhosted.org/packages/c2/36/dfc1ebc0081e6d39924a2cc53654497f967a084a436bb64402dfce4254d9/ruamel.yaml-0.18.10-py3-none-any.whl", hash = "sha256:30f22513ab2301b3d2b577adc121c6471f28734d3d9728581245f1e76468b4f1", size = 117729 },
 ]
 
 [[package]]
@@ -215,7 +215,7 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "check-jsonschema", specifier = "==0.31.0" }]
+requires-dist = [{ name = "check-jsonschema", specifier = "==0.31.3" }]
 
 [[package]]
 name = "urllib3"
