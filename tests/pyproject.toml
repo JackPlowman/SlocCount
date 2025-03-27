@@ -5,7 +5,7 @@ requires-python = ">=3.13"
 dependencies = ["check-jsonschema==0.31.0", "pytest==8.3.5", "ruff==0.11.0"]
 
 [tool.uv]
-required-version = "0.6.8"
+required-version = "0.6.10"
 package = false
 
 [tool.ruff]
