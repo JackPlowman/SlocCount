@@ -23,19 +23,19 @@ ruff-checks:
 
 # Check for Ruff issues
 ruff-lint-check:
-    uv run ruff check app
+    uv run ruff check .
 
 # Fix Ruff lint issues
 ruff-lint-fix:
-    uv run ruff check app --fix
+    uv run ruff check . --fix
 
 # Check for Ruff format issues
 ruff-format-check:
-    uv run ruff format --check app
+    uv run ruff format --check .
 
 # Fix Ruff format issues
 ruff-format-fix:
-    uv run ruff format app
+    uv run ruff format .
 
 # ------------------------------------------------------------------------------
 # UV
