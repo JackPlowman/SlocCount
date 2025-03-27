@@ -37,3 +37,18 @@ updates:
         update-types:
           - "patch"
           - "minor"
+
+  - package-ecosystem: "npm"
+    directory: "dashboard"
+    schedule:
+      interval: "daily"
+      time: "01:00"
+      timezone: "Europe/London"
+    target-branch: "main"
+    groups:
+      typescript:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
