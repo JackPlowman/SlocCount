@@ -64,7 +64,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Check Markdown links
-        uses: UmbrellaDocs/action-linkspector@v1.3.1
+        uses: UmbrellaDocs/action-linkspector@v1.3.4
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           config_file: .github/other-configurations/.linkspector.yml
@@ -105,7 +105,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload SARIF file
-        uses: github/codeql-action/upload-sarif@v3.28.11
+        uses: github/codeql-action/upload-sarif@v3.28.15
         with:
           sarif_file: results.sarif
           category: zizmor
@@ -120,7 +120,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5.3.1
+        uses: astral-sh/setup-uv@v5.4.2
         with:
           version: "latest"
       - name: Run Lefthook Validate
@@ -142,12 +142,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3.28.11
+        uses: github/codeql-action/init@v3.28.15
         with:
           languages: ${{ matrix.language }}
           queries: security-and-quality
       - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3.28.11
+        uses: github/codeql-action/analyze@v3.28.15
 
   unit-tests:
     name: Run Unit Tests
@@ -163,7 +163,7 @@ jobs:
       - name: Run Unit Tests
         run: just scanner::unit-test
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        uses: SonarSource/sonarqube-scan-action@v5.1.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -189,7 +189,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3.28.11
+        uses: github/codeql-action/upload-sarif@v3.28.15
         with:
           sarif_file: scanner/ruff-results.sarif
           wait-for-processing: true
@@ -227,7 +227,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3.28.11
+        uses: github/codeql-action/upload-sarif@v3.28.15
         with:
           sarif_file: diagrams/ruff-results.sarif
           wait-for-processing: true
@@ -263,7 +263,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@v3.28.11
+        uses: github/codeql-action/upload-sarif@v3.28.15
         with:
           sarif_file: tests/ruff-results.sarif
           wait-for-processing: true
