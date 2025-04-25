@@ -26,7 +26,7 @@ jobs:
           persist-credentials: false
       # Lint and Format everything
       - name: Lint Code Base
-        uses: super-linter/super-linter/slim@v7.3.0
+        uses: super-linter/super-linter/slim@4e8a7c2bf106c4c766c816b35ec612638dc9b6b2 # v7.3.0
         env:
           VALIDATE_ALL_CODEBASE: true
           DEFAULT_BRANCH: main
@@ -64,7 +64,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Check Markdown links
-        uses: UmbrellaDocs/action-linkspector@v1.3.1
+        uses: UmbrellaDocs/action-linkspector@c6d4525e9f50b27a0e78fc42b537141058d034ef # v1.3.1
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           config_file: .github/other-configurations/.linkspector.yml
@@ -83,7 +83,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up Just
-        uses: extractions/setup-just@v2
+        uses: extractions/setup-just@dd310ad5a97d8e7b41793f8ef055398d51ad4de6 # v2.0.0
       - name: Check Justfile Format
         run: just format-check
 
@@ -120,7 +120,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Install the latest version of uv
-        uses: astral-sh/setup-uv@v5.3.1
+        uses: astral-sh/setup-uv@f94ec6bedd8674c4426838e6b50417d36b6ab231 # v5.3.1
         with:
           version: "latest"
       - name: Run Lefthook Validate
@@ -163,7 +163,7 @@ jobs:
       - name: Run Unit Tests
         run: just scanner::unit-test
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
+        uses: SonarSource/sonarqube-scan-action@0303d6b62e310685c0e34d0b9cde218036885c4d # v5.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -291,4 +291,4 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: "Run Code Limit"
-        uses: getcodelimit/codelimit-action@v1
+        uses: getcodelimit/codelimit-action@a036c6897be9ccf69cde9dfe50eafa8cd79c98f8 # v1
