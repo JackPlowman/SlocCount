@@ -8,9 +8,8 @@ updates:
       - ".github/actions/setup-diagrams-dependencies"
       - ".github/actions/setup-tests-dependencies"
     schedule:
-      interval: "daily"
-      time: "01:00"
-      timezone: "Europe/London"
+      interval: "cron"
+      cronjob: "30 7,12,17 * * *"
     target-branch: "main"
     groups:
       github-actions:
@@ -26,9 +25,8 @@ updates:
       - "/diagrams"
       - "/tests"
     schedule:
-      interval: "daily"
-      time: "01:00"
-      timezone: "Europe/London"
+      interval: "cron"
+      cronjob: "30 7,12,17 * * *"
     target-branch: "main"
     groups:
       python:
@@ -41,9 +39,8 @@ updates:
   - package-ecosystem: "npm"
     directory: "dashboard"
     schedule:
-      interval: "daily"
-      time: "01:00"
-      timezone: "Europe/London"
+      interval: "cron"
+      cronjob: "30 7,12,17 * * *"
     target-branch: "main"
     groups:
       typescript:
