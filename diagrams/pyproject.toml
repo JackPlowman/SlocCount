@@ -5,10 +5,10 @@ requires-python = ">=3.13"
 dependencies = ["diagrams==0.24.4"]
 
 [project.optional-dependencies]
-dev = ["ruff==0.11.8"]
+dev = ["ruff==0.11.10"]
 
 [tool.uv]
-required-version = "0.7.2"
+required-version = "0.7.4"
 package = false
 
 [tool.ruff]
