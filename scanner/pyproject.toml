@@ -1,7 +1,7 @@
 [project]
 name = "scanner"
 dynamic = ["version"]
-requires-python = ">=3.13"
+requires-python = "~=3.13"
 dependencies = [
   "gitpython==3.1.44",
   "pygithub==2.6.1",
@@ -18,7 +18,7 @@ dev = [
 ]
 
 [tool.uv]
-required-version = "0.7.4"
+required-version = "0.7.5"
 package = false
 
 [tool.setuptools]
