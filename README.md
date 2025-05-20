@@ -6,10 +6,14 @@ Count the number of source lines of code (SLOC) in my projects. As well as a sum
 
 - [Sloc Count](#sloc-count)
   - [Table of Contents](#table-of-contents)
+  - [Architecture](#architecture)
   - [Contributing](#contributing)
   - [License](#license)
 
-<!-- Add documentation -->
+## Architecture
+
+![C4 Diagram](docs/c4.drawio.png)
+
 
 ## Contributing
 
