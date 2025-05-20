@@ -1,8 +1,8 @@
-# Repository Name
+# Sloc Count
 
 ## Table of Contents
 
-- [Repository Name](#repository-name)
+- [Sloc Count](#sloc-count)
   - [Table of Contents](#table-of-contents)
   - [Contributing](#contributing)
 
