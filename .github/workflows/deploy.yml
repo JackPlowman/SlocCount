@@ -9,7 +9,9 @@ on:
 
 permissions:
   contents: read
-  packages: read
+
+concurrency:
+  group: ${{ github.workflow }}
 
 jobs:
   run-scanner:
