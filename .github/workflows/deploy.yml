@@ -38,3 +38,23 @@ jobs:
         with:
           name: output
           path: scanner/output.json
+
+  validate-scanner-output:
+    name: Validate Scanner Output
+    runs-on: ubuntu-latest
+    needs: run-scanner
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Setup Test Dependencies
+        uses: ./.github/actions/setup-tests-dependencies
+      - name: Download Artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
+        with:
+          name: output
+          path: tests/schema_validation
+      - name: Validate Schema
+        run: just tests::validate-schema
