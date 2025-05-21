@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "08193c58-0b02-4235-8468-729bcc2b1d7f",
-  "timestamp": "2025-05-21T06:40:11+00:00",
+  "uuid": "3ab55a2f-b35a-4f81-933f-56cdc81897e4",
+  "timestamp": "2025-05-21T06:45:19+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -25,7 +25,7 @@
         "unmaintainable": 0
       },
       "Python": {
-        "files": 8,
+        "files": 7,
         "lines_of_code": 97,
         "functions": 9,
         "hard_to_maintain": 0,
@@ -36,7 +36,6 @@
       "./": {
         "entries": [
           "dashboard/",
-          "diagrams/",
           "scanner/"
         ],
         "profile": [73, 24, 0, 0]
@@ -52,12 +51,6 @@
       "dashboard/src/": {
         "entries": [
           "vite-env.d.ts"
-        ],
-        "profile": [0, 0, 0, 0]
-      },
-      "diagrams/": {
-        "entries": [
-          "c4.py"
         ],
         "profile": [0, 0, 0, 0]
       },
@@ -100,14 +93,6 @@
       "dashboard/src/vite-env.d.ts": {
         "checksum": "0352474ba2918efe13895edbc3780d94",
         "language": "TypeScript",
-        "loc": 0,
-        "profile": [0, 0, 0, 0],
-        "measurements": [
-        ]
-      },
-      "diagrams/c4.py": {
-        "checksum": "e019775dd2947c4f2dce9a35d44f5c38",
-        "language": "Python",
         "loc": 0,
         "profile": [0, 0, 0, 0],
         "measurements": [
