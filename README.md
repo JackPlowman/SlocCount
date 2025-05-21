@@ -14,7 +14,6 @@ Count the number of source lines of code (SLOC) in my projects. As well as a sum
 
 ![C4 Diagram](docs/c4.drawio.png)
 
-
 ## Contributing
 
 We welcome contributions to the project. Please read the [Contributing Guidelines](docs/CONTRIBUTING.md) for more information.
