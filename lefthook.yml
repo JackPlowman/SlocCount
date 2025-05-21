@@ -26,7 +26,5 @@ pre-commit:
       run: just scanner::vulture
     Scanner UV Lock Check:
       run: just scanner::uv-lock-check
-    Diagrams UV Lock Check:
-      run: just diagrams::uv-lock-check
     Tests UV Lock Check:
       run: just tests::uv-lock-check

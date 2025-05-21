@@ -1,5 +1,4 @@
 mod scanner 'scanner/scanner.just'
-mod diagrams 'diagrams/diagrams.just'
 mod tests 'tests/tests.just'
 
 # ------------------------------------------------------------------------------
@@ -22,14 +21,12 @@ prettier-format:
 format:
     just --fmt --unstable
     just --fmt --unstable --justfile scanner/scanner.just
-    just --fmt --unstable --justfile diagrams/diagrams.just
     just --fmt --unstable --justfile tests/tests.just
 
 # Check Justfile formatting
 format-check:
     just --fmt --check --unstable
     just --fmt --check --unstable --justfile scanner/scanner.just
-    just --fmt --check --unstable --justfile diagrams/diagrams.just
     just --fmt --check --unstable --justfile tests/tests.just
 
 # ------------------------------------------------------------------------------

@@ -5,7 +5,6 @@ updates:
     directories:
       - "/"
       - ".github/actions/setup-scanner-dependencies"
-      - ".github/actions/setup-diagrams-dependencies"
       - ".github/actions/setup-tests-dependencies"
     schedule:
       interval: "cron"
@@ -27,7 +26,6 @@ updates:
   - package-ecosystem: "uv"
     directories:
       - "/scanner"
-      - "/diagrams"
       - "/tests"
     schedule:
       interval: "cron"
