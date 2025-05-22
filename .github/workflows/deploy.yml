@@ -58,3 +58,38 @@ jobs:
           path: tests/schema_validation
       - name: Validate Schema
         run: just tests::validate-schema
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: validate-scanner-output
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Set up Node.js with Cache
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version-file: "dashboard/package.json"
+          cache: "npm"
+          cache-dependency-path: "dashboard/package-lock.json"
+      - name: Install dependencies
+        run: rm -rf node_modules && rm -rf package-lock.json && npm ci
+        working-directory: ./dashboard
+      - name: Build
+        run: npm run build
+        working-directory: ./dashboard
+      - name: Setup Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: "./dashboard/dist"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5
