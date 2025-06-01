@@ -1,10 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "additionalProperties": false,
   "type": "object",
   "properties": {
     "total": {
-      "additionalProperties": false,
       "type": "object",
       "properties": {
         "lines": {
@@ -15,7 +13,33 @@
         }
       },
       "required": ["lines", "files"]
+    },
+    "repositories": {
+      "type": "array",
+      "items": [
+        {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "object",
+              "properties": {
+                "lines": {
+                  "type": "integer"
+                },
+                "files": {
+                  "type": "integer"
+                }
+              },
+              "required": ["lines", "files"]
+            }
+          },
+          "required": ["name", "summary"]
+        }
+      ]
     }
   },
-  "required": ["total"]
+  "required": ["total", "repositories"]
 }

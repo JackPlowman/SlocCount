@@ -91,10 +91,11 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
     # Assert
     mock_dump.assert_called_once_with(
         {
-            "total": {
-                "lines": 300,
-                "files": 30,
-            }
+            "total": {"lines": 300, "files": 30},
+            "repositories": [
+                {"name": "repo1", "summary": {"lines": 100, "files": 10}},
+                {"name": "repo2", "summary": {"lines": 200, "files": 20}},
+            ],
         },
         mock_file,
         indent=4,

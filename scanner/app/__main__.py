@@ -66,7 +66,17 @@ def generate_output(analysis: list[AnalysedRepository]) -> None:
         "total": {
             "lines": total_code_lines,
             "files": total_files,
-        }
+        },
+        "repositories": [
+            {
+                "name": repository["name"],
+                "summary": {
+                    "lines": repository["summary"].total_line_count,
+                    "files": repository["summary"].total_file_count,
+                },
+            }
+            for repository in analysis
+        ],
     }
     with Path("output.json").open("w", encoding="utf-8") as file:
         dump(dict_to_json, file, indent=4, ensure_ascii=False)
