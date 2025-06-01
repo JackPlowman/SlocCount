@@ -16,6 +16,7 @@
     },
     "repositories": {
       "type": "array",
+      "additionalItems": false,
       "items": [
         {
           "type": "object",
