@@ -1,7 +1,7 @@
 {
   "version": "0.18.1",
-  "uuid": "8772a0dc-6c60-469e-b30e-9fc96075da94",
-  "timestamp": "2025-06-01T21:04:51+00:00",
+  "uuid": "766e471d-3baf-4ff3-a1e9-8759312eca09",
+  "timestamp": "2025-06-02T07:15:04+00:00",
   "root": "/github/workspace",
   "repository": {
     "owner": "JackPlowman",
@@ -26,7 +26,7 @@
       },
       "Python": {
         "files": 7,
-        "lines_of_code": 97,
+        "lines_of_code": 107,
         "functions": 9,
         "hard_to_maintain": 0,
         "unmaintainable": 0
@@ -38,7 +38,7 @@
           "dashboard/",
           "scanner/"
         ],
-        "profile": [73, 24, 0, 0]
+        "profile": [59, 48, 0, 0]
       },
       "dashboard/": {
         "entries": [
@@ -59,7 +59,7 @@
           "__init__.py",
           "app/"
         ],
-        "profile": [73, 24, 0, 0]
+        "profile": [59, 48, 0, 0]
       },
       "scanner/app/": {
         "entries": [
@@ -70,7 +70,7 @@
           "custom_logging.py",
           "github_interactions.py"
         ],
-        "profile": [73, 24, 0, 0]
+        "profile": [59, 48, 0, 0]
       }
     },
     "files": {
@@ -115,15 +115,15 @@
         ]
       },
       "scanner/app/__main__.py": {
-        "checksum": "c148d384aa8a53fd3be16492a7f90088",
+        "checksum": "ef64813d0b411cc49461644eb62290d3",
         "language": "Python",
-        "loc": 57,
-        "profile": [33, 24, 0, 0],
+        "loc": 67,
+        "profile": [19, 48, 0, 0],
         "measurements": [
           {"unit_name": "main", "start": {"line": 16, "column": 1}, "end": {"line": 27, "column": 36}, "value": 12},
           {"unit_name": "run_analyser", "start": {"line": 30, "column": 1}, "end": {"line": 56, "column": 30}, "value": 24},
-          {"unit_name": "generate_output", "start": {"line": 59, "column": 1}, "end": {"line": 72, "column": 63}, "value": 14},
-          {"unit_name": "clean_up", "start": {"line": 75, "column": 1}, "end": {"line": 81, "column": 31}, "value": 7}
+          {"unit_name": "generate_output", "start": {"line": 59, "column": 1}, "end": {"line": 82, "column": 63}, "value": 24},
+          {"unit_name": "clean_up", "start": {"line": 85, "column": 1}, "end": {"line": 91, "column": 31}, "value": 7}
         ]
       },
       "scanner/app/configuration.py": {
