@@ -28,7 +28,6 @@ unit-test-debug:
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
-# Set up ruff red-knot when it's ready
 # ------------------------------------------------------------------------------
 
 # Fix all Ruff issues
@@ -58,15 +57,20 @@ ruff-format-fix:
     uv run ruff format app
 
 # ------------------------------------------------------------------------------
-# UV
+# Ty - Python Type Checking
 # ------------------------------------------------------------------------------
 
-uv-lock-check:
-    uv lock --check
+# Check for type issues with Ty
+ty-check:
+    uv run ty check .
 
 # ------------------------------------------------------------------------------
 # Other Python Tools
 # ------------------------------------------------------------------------------
+
+# Check uv lockfile
+uv-lock-check:
+    uv lock --check
 
 # Check for unused code
 vulture:

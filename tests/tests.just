@@ -8,38 +8,46 @@ validate-schema:
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
-# Set up ruff red-knot when it's ready
 # ------------------------------------------------------------------------------
 
 # Fix all Ruff issues
 ruff-fix:
-    just scanner::ruff-format-fix
-    just scanner::ruff-lint-fix
+    just tests::ruff-format-fix
+    just tests::ruff-lint-fix
 
 # Check for all Ruff issues
 ruff-checks:
-    just scanner::ruff-format-check
-    just scanner::ruff-lint-check
+    just tests::ruff-format-check
+    just tests::ruff-lint-check
 
 # Check for Ruff issues
 ruff-lint-check:
-    uv run ruff check .
+    uv run ruff check ui
 
 # Fix Ruff lint issues
 ruff-lint-fix:
-    uv run ruff check . --fix
+    uv run ruff check ui --fix --unsafe-fixes
 
 # Check for Ruff format issues
 ruff-format-check:
-    uv run ruff format --check .
+    uv run ruff format --check ui
 
 # Fix Ruff format issues
 ruff-format-fix:
-    uv run ruff format .
+    uv run ruff format ui
 
 # ------------------------------------------------------------------------------
-# UV
+# Ty - Python Type Checking
 # ------------------------------------------------------------------------------
 
+# Check for type issues with Ty
+ty-check:
+    uv run ty check .
+
+# ------------------------------------------------------------------------------
+# Other Python Tools
+# ------------------------------------------------------------------------------
+
+# Check uv lockfile
 uv-lock-check:
     uv lock --check
