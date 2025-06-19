@@ -22,19 +22,19 @@ ruff-checks:
 
 # Check for Ruff issues
 ruff-lint-check:
-    uv run ruff check ui
+    uv run ruff check .
 
 # Fix Ruff lint issues
 ruff-lint-fix:
-    uv run ruff check ui --fix --unsafe-fixes
+    uv run ruff check . --fix --unsafe-fixes
 
 # Check for Ruff format issues
 ruff-format-check:
-    uv run ruff format --check ui
+    uv run ruff format --check .
 
 # Fix Ruff format issues
 ruff-format-fix:
-    uv run ruff format ui
+    uv run ruff format .
 
 # ------------------------------------------------------------------------------
 # Ty - Python Type Checking
