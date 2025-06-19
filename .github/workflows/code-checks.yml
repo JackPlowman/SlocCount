@@ -128,7 +128,7 @@ jobs:
           RUFF_OUTPUT_FORMAT: "github"
 
   run-python-scanner-format-checks:
-    name: Run Python Format Checks
+    name: Run Python Scanner Format Checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -175,7 +175,7 @@ jobs:
         run: just scanner::vulture
 
   run-python-scanner-lockfile-check:
-    name: Run Python Lockfile Check
+    name: Run Python Scanner Lockfile Check
     runs-on: ubuntu-latest
     permissions:
       statuses: write
