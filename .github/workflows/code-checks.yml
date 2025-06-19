@@ -110,7 +110,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies
       - name: Generate Ruff Sarif
         run: just scanner::ruff-lint-check
         env:
