@@ -170,7 +170,7 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies
       - name: Check Python Code for Dead Code (Vulture)
         run: just scanner::vulture
 
