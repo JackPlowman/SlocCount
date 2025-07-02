@@ -11,10 +11,10 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "pytest==8.4.0",
+  "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.0",
-  "ty==0.0.1a11",
+  "ruff==0.12.1",
+  "ty==0.0.1a12",
   "vulture==2.14",
 ]
 
