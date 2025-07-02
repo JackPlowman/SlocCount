@@ -62,7 +62,7 @@ ruff-format-fix:
 
 # Check for type issues with Ty
 ty-check:
-    uv run ty check .
+    uv run ty check . --extra-search-path ../
 
 # ------------------------------------------------------------------------------
 # Other Python Tools
