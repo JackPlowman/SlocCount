@@ -1,46 +1,63 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://example.com/sloc-count-output.schema.json",
+  "title": "SlocCount Output Schema",
+  "description": "Schema for SlocCount tool output containing repository statistics",
   "type": "object",
+  "required": ["total", "repositories"],
   "properties": {
     "total": {
       "type": "object",
+      "description": "Total statistics across all repositories",
+      "required": ["lines", "files"],
       "properties": {
         "lines": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of lines across all repositories"
         },
         "files": {
-          "type": "integer"
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total number of files across all repositories"
         }
       },
-      "required": ["lines", "files"]
+      "additionalProperties": false
     },
     "repositories": {
       "type": "array",
-      "additionalItems": false,
-      "items": [
-        {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "summary": {
-              "type": "object",
-              "properties": {
-                "lines": {
-                  "type": "integer"
-                },
-                "files": {
-                  "type": "integer"
-                }
-              },
-              "required": ["lines", "files"]
-            }
+      "description": "Array of repository statistics",
+      "items": {
+        "type": "object",
+        "required": ["name", "summary"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Name of the repository"
           },
-          "required": ["name", "summary"]
-        }
-      ]
+          "summary": {
+            "type": "object",
+            "description": "Summary statistics for the repository",
+            "required": ["lines", "files"],
+            "properties": {
+              "lines": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of lines in the repository"
+              },
+              "files": {
+                "type": "integer",
+                "minimum": 0,
+                "description": "Number of files in the repository"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
     }
   },
-  "required": ["total", "repositories"]
+  "additionalProperties": false
 }
