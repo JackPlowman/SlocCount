@@ -13,13 +13,13 @@ dependencies = [
 dev = [
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.1",
-  "ty==0.0.1a12",
+  "ruff==0.12.2",
+  "ty==0.0.1a14",
   "vulture==2.14",
 ]
 
 [tool.uv]
-required-version = "0.7.18"
+required-version = "0.7.19"
 package = false
 
 [tool.setuptools]
