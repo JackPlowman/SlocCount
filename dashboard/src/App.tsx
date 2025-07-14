@@ -1,7 +1,17 @@
 function App() {
   return (
-    <div>
-      <h1 className="text-center m-5 text-4xl">Welcome to the Dashboard</h1>
+    <div className="min-h-screen w-full relative bg-white">
+      {/* Orange Soft Glow - Inverted Circle */}
+      <div
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: `
+          radial-gradient(circle at center, transparent 0%, #FF7112 100%)
+        `,
+          opacity: 0.3,
+          mixBlendMode: "multiply",
+        }}
+      />
     </div>
   );
 }
