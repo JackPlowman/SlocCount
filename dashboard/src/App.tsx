@@ -1,5 +1,5 @@
-import Background from "./components/background";
 import AppSidebar from "./components/app-sidebar";
+import Background from "./components/background";
 
 function App() {
   return (
