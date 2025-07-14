@@ -36,7 +36,7 @@ export default function AppSidebar({
           <SidebarGroupLabel>Repositories</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {Object.entries(repositories).map(([repoName, repoData]) => (
+              {Object.entries(repositories).map(([repoName]) => (
                 <SidebarMenuItem key={repoName}>
                   <SidebarMenuButton>{repoName}</SidebarMenuButton>
                 </SidebarMenuItem>
