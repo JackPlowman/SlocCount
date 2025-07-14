@@ -1,11 +1,11 @@
-import Background from "./components/Background";
-import { Sidebar } from "./components/ui/sidebar";
+import Background from "./components/background";
+import AppSidebar from "./components/app-sidebar";
 
 function App() {
   return (
     <div className="min-h-screen w-full relative bg-white flex">
       <Background />
-      <Sidebar />
+      <AppSidebar />
       {/* Main Dashboard */}
       <main className="relative z-10 flex-1 flex justify-center items-center">
         <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-10 flex flex-col gap-8 min-w-[850px] min-h-[500px]">
