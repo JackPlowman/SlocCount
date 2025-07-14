@@ -1,24 +1,14 @@
 import Background from "./components/Background";
+import { Sidebar } from "./components/ui/sidebar";
+
 function App() {
   return (
     <div className="min-h-screen w-full relative bg-white flex">
       <Background />
-      {/* Sidebar */}
-      <aside className="relative z-10 w-72 bg-white border-r border-gray-200 flex flex-col items-center py-12 gap-6 shadow-md">
-        <button className="w-56 h-12 flex items-center gap-2 px-4 rounded-lg border border-gray-300 bg-white hover:bg-orange-50 text-lg font-medium">
-          <span className="material-icons">search</span>
-          Search
-        </button>
-        <button className="w-56 h-12 px-4 rounded-lg border border-gray-300 bg-white hover:bg-orange-50 text-lg font-medium">
-          Overview
-        </button>
-        <button className="w-56 h-12 px-4 rounded-lg border border-gray-300 bg-white hover:bg-orange-50 text-lg font-medium">
-          Repo A
-        </button>
-      </aside>
+      <Sidebar />
       {/* Main Dashboard */}
       <main className="relative z-10 flex-1 flex justify-center items-center">
-        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-10 flex flex-col gap-8 min-w-[700px] min-h-[500px]">
+        <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-10 flex flex-col gap-8 min-w-[850px] min-h-[500px]">
           {/* Stat Cards */}
           <div className="grid grid-cols-4 gap-4 mb-8">
             <div className="bg-gray-100 rounded-lg flex flex-col items-center justify-center h-24 text-lg font-semibold border border-gray-300">
