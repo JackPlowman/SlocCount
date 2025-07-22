@@ -86,10 +86,10 @@ export default function AppSidebar({
               {displayRepos.map((repo) => (
                 <SidebarMenuItem key={repo.name}>
                   <SidebarMenuButton
-                    isActive={selectedRepo?.name === repo.name}
-                    onClick={() => onSelectRepo(repo)}
+                  isActive={selectedRepo?.name === repo.name}
+                  onClick={() => onSelectRepo(repo)}
                   >
-                    {repo.name}
+                  {repo.name}
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
