@@ -1,5 +1,5 @@
 name: "Setup Dashboard Dependencies"
-description: "Installs dependencies for the project"
+description: "Installs dependencies for the dashboard."
 
 runs:
   using: "composite"
