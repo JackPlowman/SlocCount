@@ -13,6 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarSeparator,
 } from "@/components/ui/sidebar";
 
 import { RepoStats } from "@/types/types";
@@ -42,6 +43,33 @@ export default function AppSidebar({
         {/* We create a SidebarGroup for each parent. */}
         <SidebarGroup>
           <SidebarGroupLabel>Repositories</SidebarGroupLabel>
+          <div className="flex flex-col gap-2 mt-2">
+            <button
+              type="button"
+              className="px-4 py-1 text-sm bg-gray-100 rounded-xl hover:bg-gray-200"
+              onClick={() => {
+                const sorted = [...repositories].sort((a, b) =>
+                  a.name.localeCompare(b.name),
+                );
+                onSelectRepo(sorted[0]);
+              }}
+            >
+              Sort A-Z
+            </button>
+            <button
+              type="button"
+              className="px-4 py-1 text-sm bg-gray-100 rounded-xl hover:bg-gray-200"
+              onClick={() => {
+                const sorted = [...repositories].sort(
+                  (a, b) => b.summary.lines - a.summary.lines,
+                );
+                onSelectRepo(sorted[0]);
+              }}
+            >
+              Sort by Size
+            </button>
+          </div>
+          <SidebarSeparator />
           <SidebarGroupContent>
             <SidebarMenu>
               {sortedRepositories.map((repo) => (
