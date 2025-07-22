@@ -62,7 +62,7 @@ jobs:
       actions: read
       pull-requests: write
       security-events: write
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@f45ce248498fd7d46a13ed80fb9f37e08014baae # v2025.07.20.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@e5bce22fac6a92a28630f44ea3dfb21f817fabbb # v2025.07.22.03
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -74,7 +74,7 @@ jobs:
     strategy:
       matrix:
         language: [actions, typescript, python]
-    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@f45ce248498fd7d46a13ed80fb9f37e08014baae # v2025.07.20.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@e5bce22fac6a92a28630f44ea3dfb21f817fabbb # v2025.07.22.03
     with:
       language: ${{ matrix.language }}
 
@@ -92,7 +92,7 @@ jobs:
       - name: Run Unit Tests
         run: just scanner::unit-test
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@2500896589ef8f7247069a56136f8dc177c27ccf # v5.2.0
+        uses: SonarSource/sonarqube-scan-action@8c71dc039c2dd71d3821e89a2b58ecc7fee6ced9 # v5.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
@@ -118,7 +118,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        uses: github/codeql-action/upload-sarif@d6bbdef45e766d081b84a2def353b0055f728d3e # v3.29.3
         with:
           sarif_file: scanner/ruff-results.sarif
           wait-for-processing: true
@@ -212,7 +212,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@181d5eefc20863364f96762470ba6f862bdef56b # v3.29.2
+        uses: github/codeql-action/upload-sarif@d6bbdef45e766d081b84a2def353b0055f728d3e # v3.29.3
         with:
           sarif_file: tests/ruff-results.sarif
           wait-for-processing: true
