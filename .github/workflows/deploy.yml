@@ -81,6 +81,11 @@ jobs:
         uses: ./.github/actions/setup-dashboard-dependencies
       - name: Install dependencies
         run: just dashboard::ci
+
+      - name: ls -a
+        run: ls -a ./dashboard
+      - name: ls -a 2
+        run: ls -a ./dashboard/components
       - name: Build
         run: just dashboard::build
       - name: Setup Pages
