@@ -106,17 +106,3 @@ export default function AppSidebar({
     </Sidebar>
   );
 }
-                    onClick={() => onSelectRepo(repo)}
-                  >
-                    {repo.name}
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-      <SidebarRail />
-    </Sidebar>
-  );
-}
