@@ -13,7 +13,7 @@ dependencies = [
 dev = [
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.2",
+  "ruff==0.12.4",
   "ty==0.0.1a14",
   "vulture==2.14",
 ]
