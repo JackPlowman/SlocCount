@@ -28,9 +28,29 @@ export default function AppSidebar({
   selectedRepo: RepoStats;
   onSelectRepo: (repo: RepoStats) => void;
 }) {
-  const sortedRepositories = [...repositories].sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
+  // 1. State for displayed repositories
+  const [displayRepos, setDisplayRepos] = React.useState(repositories);
+
+  // 2. Sync state with repositories prop
+  React.useEffect(() => {
+    setDisplayRepos(repositories);
+  }, [repositories]);
+
+  // 3. Named sort handlers
+  const handleSortByName = () => {
+    const sorted = [...displayRepos].sort((a, b) =>
+      a.name.localeCompare(b.name),
+    );
+    setDisplayRepos(sorted);
+  };
+
+  const handleSortBySize = () => {
+    const sorted = [...displayRepos].sort(
+      (a, b) => b.summary.lines - a.summary.lines,
+    );
+    setDisplayRepos(sorted);
+  };
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -47,24 +67,14 @@ export default function AppSidebar({
             <button
               type="button"
               className="px-4 py-1 text-sm bg-gray-100 rounded-xl hover:bg-gray-200"
-              onClick={() => {
-                const sorted = [...repositories].sort((a, b) =>
-                  a.name.localeCompare(b.name),
-                );
-                onSelectRepo(sorted[0]);
-              }}
+              onClick={handleSortByName}
             >
               Sort A-Z
             </button>
             <button
               type="button"
               className="px-4 py-1 text-sm bg-gray-100 rounded-xl hover:bg-gray-200"
-              onClick={() => {
-                const sorted = [...repositories].sort(
-                  (a, b) => b.summary.lines - a.summary.lines,
-                );
-                onSelectRepo(sorted[0]);
-              }}
+              onClick={handleSortBySize}
             >
               Sort by Size
             </button>
@@ -72,7 +82,8 @@ export default function AppSidebar({
           <SidebarSeparator />
           <SidebarGroupContent>
             <SidebarMenu>
-              {sortedRepositories.map((repo) => (
+              {/* 4. Render displayRepos instead of repositories */}
+              {displayRepos.map((repo) => (
                 <SidebarMenuItem key={repo.name}>
                   <SidebarMenuButton
                     isActive={selectedRepo?.name === repo.name}
