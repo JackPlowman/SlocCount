@@ -1,8 +1,8 @@
 import AppSidebar from "@/components/app-sidebar";
 import Background from "@/components/background";
 import DataPane from "@/components/data-pane";
-import repoData from "../data/output.json";
 import { useState } from "react";
+import repoData from "../data/output.json";
 
 function App() {
   // Load repositories from JSON
