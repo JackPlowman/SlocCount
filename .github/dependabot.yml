@@ -6,6 +6,7 @@ updates:
       - "/"
       - ".github/actions/setup-scanner-dependencies"
       - ".github/actions/setup-tests-dependencies"
+      - ".github/actions/setup-dashboard-dependencies"
     schedule:
       interval: "cron"
       cronjob: "30 7 * * *"
