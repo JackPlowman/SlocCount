@@ -7,15 +7,18 @@ dependencies = [
   "pygithub==2.6.1",
   "structlog==25.4.0",
   "pygount==3.1.0",
+  "pandas>=2.3.1",
 ]
 
 [project.optional-dependencies]
 dev = [
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.2",
+  "ruff==0.12.3",
   "ty==0.0.1a14",
   "vulture==2.14",
+  "marimo==0.14.10",
+  "pandas==2.3.1"
 ]
 
 [tool.uv]
