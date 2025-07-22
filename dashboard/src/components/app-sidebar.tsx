@@ -30,6 +30,7 @@ export default function AppSidebar({
 }) {
   // 1. State for displayed repositories
   const [displayRepos, setDisplayRepos] = React.useState(repositories);
+  const [sort, setSort] = React.useState<"A-Z" | "Z-A" | "Largest" | "Smallest">("A-Z");
 
   // 2. Sync state with repositories prop
   React.useEffect(() => {
@@ -38,17 +39,35 @@ export default function AppSidebar({
 
   // 3. Named sort handlers
   const handleSortByName = () => {
+    if (sort === "A-Z") {
+      setSort("Z-A");
+      const sorted = [...displayRepos].sort((a, b) =>
+        b.name.localeCompare(a.name),
+      );
+      setDisplayRepos(sorted);
+      return;
+    }
     const sorted = [...displayRepos].sort((a, b) =>
       a.name.localeCompare(b.name),
     );
     setDisplayRepos(sorted);
+    setSort("A-Z");
   };
 
   const handleSortBySize = () => {
+    if (sort === "Largest") {
+      setSort("Smallest");
+      const sorted = [...displayRepos].sort(
+        (a, b) => a.summary.lines - b.summary.lines,
+      );
+      setDisplayRepos(sorted);
+      return;
+    }
     const sorted = [...displayRepos].sort(
       (a, b) => b.summary.lines - a.summary.lines,
     );
     setDisplayRepos(sorted);
+    setSort("Largest");
   };
 
   return (
