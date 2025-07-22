@@ -14,6 +14,10 @@ ci:
 dev:
     npm run dev
 
+# Build the application for production
+build:
+    npm run build
+
 # Lint typescript code with ESLint
 lint:
     npx eslint .

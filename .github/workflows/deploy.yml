@@ -77,18 +77,10 @@ jobs:
         with:
           name: output
           path: dashboard/data
-      - name: Set up Node.js with Cache
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
-        with:
-          node-version-file: "dashboard/package.json"
-          cache: "npm"
-          cache-dependency-path: "dashboard/package-lock.json"
-      - name: Install dependencies
-        run: npm ci
-        working-directory: ./dashboard
+      - name: Setup Dashboard Dependencies
+        uses: ./.github/actions/setup-dashboard-dependencies
       - name: Build
-        run: npm run build
-        working-directory: ./dashboard
+        run: just dashboard::build
       - name: Setup Pages
         uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
       - name: Upload artifact
