@@ -27,6 +27,9 @@ export default function AppSidebar({
   selectedRepo: RepoStats;
   onSelectRepo: (repo: RepoStats) => void;
 }) {
+  const sortedRepositories = [...repositories].sort((a, b) =>
+    a.name.localeCompare(b.name)
+  );
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -41,7 +44,7 @@ export default function AppSidebar({
           <SidebarGroupLabel>Repositories</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {repositories.map((repo) => (
+              {sortedRepositories.map((repo) => (
                 <SidebarMenuItem key={repo.name}>
                   <SidebarMenuButton
                     isActive={selectedRepo?.name === repo.name}
