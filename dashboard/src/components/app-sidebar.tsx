@@ -29,7 +29,9 @@ export default function AppSidebar({
   onSelectRepo: (repo: RepoStats) => void;
 }) {
   // Use a single sort state
-  const [sort, setSort] = React.useState<"A-Z" | "Z-A" | "Largest" | "Smallest">("A-Z");
+  const [sort, setSort] = React.useState<
+    "A-Z" | "Z-A" | "Largest" | "Smallest"
+  >("A-Z");
 
   // Derive displayRepos using useMemo
   const displayRepos = React.useMemo(() => {
@@ -54,7 +56,9 @@ export default function AppSidebar({
 
   // Toggle sort order for size
   const handleSortBySize = () => {
-    setSort((currentSort) => (currentSort === "Largest" ? "Smallest" : "Largest"));
+    setSort((currentSort) =>
+      currentSort === "Largest" ? "Smallest" : "Largest",
+    );
   };
 
   return (
