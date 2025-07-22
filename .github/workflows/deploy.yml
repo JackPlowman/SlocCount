@@ -79,13 +79,6 @@ jobs:
           path: dashboard/data
       - name: Setup Dashboard Dependencies
         uses: ./.github/actions/setup-dashboard-dependencies
-
-      - name: ls -a
-        run: ls -a ./dashboard
-      - name: ls -a 2
-        run: ls -a ./dashboard/src
-      - name: ls -a 3
-        run: ls -a ./dashboard/src/components
       - name: Build
         run: just dashboard::build
       - name: Setup Pages
