@@ -28,27 +28,33 @@ export default function AppSidebar({
   selectedRepo: RepoStats;
   onSelectRepo: (repo: RepoStats) => void;
 }) {
-  // 1. State for displayed repositories
-  const [displayRepos, setDisplayRepos] = React.useState(repositories);
+  // Use a single sort state
+  const [sort, setSort] = React.useState<"A-Z" | "Z-A" | "Largest" | "Smallest">("A-Z");
 
-  // 2. Sync state with repositories prop
-  React.useEffect(() => {
-    setDisplayRepos(repositories);
-  }, [repositories]);
+  // Derive displayRepos using useMemo
+  const displayRepos = React.useMemo(() => {
+    const sorted = [...repositories];
+    switch (sort) {
+      case "Z-A":
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case "Largest":
+        return sorted.sort((a, b) => b.summary.lines - a.summary.lines);
+      case "Smallest":
+        return sorted.sort((a, b) => a.summary.lines - b.summary.lines);
+      case "A-Z":
+      default:
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+    }
+  }, [repositories, sort]);
 
-  // 3. Named sort handlers
+  // Toggle sort order for name
   const handleSortByName = () => {
-    const sorted = [...displayRepos].sort((a, b) =>
-      a.name.localeCompare(b.name),
-    );
-    setDisplayRepos(sorted);
+    setSort((currentSort) => (currentSort === "A-Z" ? "Z-A" : "A-Z"));
   };
 
+  // Toggle sort order for size
   const handleSortBySize = () => {
-    const sorted = [...displayRepos].sort(
-      (a, b) => b.summary.lines - a.summary.lines,
-    );
-    setDisplayRepos(sorted);
+    setSort((currentSort) => (currentSort === "Largest" ? "Smallest" : "Largest"));
   };
 
   return (
@@ -82,7 +88,6 @@ export default function AppSidebar({
           <SidebarSeparator />
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* 4. Render displayRepos instead of repositories */}
               {displayRepos.map((repo) => (
                 <SidebarMenuItem key={repo.name}>
                   <SidebarMenuButton
