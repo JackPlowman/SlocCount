@@ -43,4 +43,7 @@ def test_retrieve_repositories(mock_github: MagicMock) -> None:
     repositories = retrieve_repositories(configuration)
     # Assert
     mock_github.assert_called_once_with(token)
+    mock_github.return_value.search_repositories.assert_called_once_with(
+        query="user:Test archived:false is:public"
+    )
     assert repositories == search_return
