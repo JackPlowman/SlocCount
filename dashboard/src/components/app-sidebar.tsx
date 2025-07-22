@@ -15,15 +15,17 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
+import { RepoStats } from "@/types/types";
+
 export default function AppSidebar({
   repositories,
   selectedRepo,
   onSelectRepo,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
-  repositories: Array<{ name: string; summary: any }>;
-  selectedRepo: { name: string; summary: any };
-  onSelectRepo: (repo: { name: string; summary: any }) => void;
+  repositories: Array<RepoStats>;
+  selectedRepo: RepoStats;
+  onSelectRepo: (repo: RepoStats) => void;
 }) {
   return (
     <Sidebar {...props}>
