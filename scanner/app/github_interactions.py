@@ -45,7 +45,7 @@ def retrieve_repositories(configuration: Configuration) -> PaginatedList[Reposit
     """
     github = Github(configuration.github_token)
     repositories = github.search_repositories(
-        query=f"user:{configuration.repository_owner} archived:false"
+        query=f"user:{configuration.repository_owner} archived:false is:public"
     )
     logger.info(
         "Retrieved repositories to analyse",
