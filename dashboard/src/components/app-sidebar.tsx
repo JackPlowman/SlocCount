@@ -28,46 +28,33 @@ export default function AppSidebar({
   selectedRepo: RepoStats;
   onSelectRepo: (repo: RepoStats) => void;
 }) {
-  // 1. State for displayed repositories
-  const [displayRepos, setDisplayRepos] = React.useState(repositories);
+  // Use a single sort state
   const [sort, setSort] = React.useState<"A-Z" | "Z-A" | "Largest" | "Smallest">("A-Z");
 
-  // 2. Sync state with repositories prop
-  React.useEffect(() => {
-    setDisplayRepos(repositories);
-  }, [repositories]);
-
-  // 3. Named sort handlers
-  const handleSortByName = () => {
-    if (sort === "A-Z") {
-      setSort("Z-A");
-      const sorted = [...displayRepos].sort((a, b) =>
-        b.name.localeCompare(a.name),
-      );
-      setDisplayRepos(sorted);
-      return;
+  // Derive displayRepos using useMemo
+  const displayRepos = React.useMemo(() => {
+    const sorted = [...repositories];
+    switch (sort) {
+      case "Z-A":
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case "Largest":
+        return sorted.sort((a, b) => b.summary.lines - a.summary.lines);
+      case "Smallest":
+        return sorted.sort((a, b) => a.summary.lines - b.summary.lines);
+      case "A-Z":
+      default:
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
     }
-    const sorted = [...displayRepos].sort((a, b) =>
-      a.name.localeCompare(b.name),
-    );
-    setDisplayRepos(sorted);
-    setSort("A-Z");
+  }, [repositories, sort]);
+
+  // Toggle sort order for name
+  const handleSortByName = () => {
+    setSort((currentSort) => (currentSort === "A-Z" ? "Z-A" : "A-Z"));
   };
 
+  // Toggle sort order for size
   const handleSortBySize = () => {
-    if (sort === "Largest") {
-      setSort("Smallest");
-      const sorted = [...displayRepos].sort(
-        (a, b) => a.summary.lines - b.summary.lines,
-      );
-      setDisplayRepos(sorted);
-      return;
-    }
-    const sorted = [...displayRepos].sort(
-      (a, b) => b.summary.lines - a.summary.lines,
-    );
-    setDisplayRepos(sorted);
-    setSort("Largest");
+    setSort((currentSort) => (currentSort === "Largest" ? "Smallest" : "Largest"));
   };
 
   return (
@@ -101,11 +88,24 @@ export default function AppSidebar({
           <SidebarSeparator />
           <SidebarGroupContent>
             <SidebarMenu>
-              {/* 4. Render displayRepos instead of repositories */}
               {displayRepos.map((repo) => (
                 <SidebarMenuItem key={repo.name}>
                   <SidebarMenuButton
                     isActive={selectedRepo?.name === repo.name}
+                    onClick={() => onSelectRepo(repo)}
+                  >
+                    {repo.name}
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarRail />
+    </Sidebar>
+  );
+}
                     onClick={() => onSelectRepo(repo)}
                   >
                     {repo.name}
