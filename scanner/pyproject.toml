@@ -13,7 +13,7 @@ dependencies = [
 dev = [
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.3",
+  "ruff==0.12.4",
   "ty==0.0.1a15",
   "vulture==2.14",
 ]
@@ -21,6 +21,7 @@ dev = [
 [tool.uv]
 required-version = "~=0.8.0"
 package = false
+override-dependencies = ["urllib3~=2.5.0"]
 
 [tool.setuptools]
 py-modules = ["app", "cloned_repositories"]
