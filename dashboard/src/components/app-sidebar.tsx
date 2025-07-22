@@ -15,13 +15,16 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-const repositories = {
-  DependabotTrigger: {},
-};
-
 export default function AppSidebar({
+  repositories,
+  selectedRepo,
+  onSelectRepo,
   ...props
-}: React.ComponentProps<typeof Sidebar>) {
+}: React.ComponentProps<typeof Sidebar> & {
+  repositories: Array<{ name: string; summary: any }>;
+  selectedRepo: { name: string; summary: any };
+  onSelectRepo: (repo: { name: string; summary: any }) => void;
+}) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -36,9 +39,14 @@ export default function AppSidebar({
           <SidebarGroupLabel>Repositories</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {Object.entries(repositories).map(([repoName]) => (
-                <SidebarMenuItem key={repoName}>
-                  <SidebarMenuButton>{repoName}</SidebarMenuButton>
+              {repositories.map((repo) => (
+                <SidebarMenuItem key={repo.name}>
+                  <SidebarMenuButton
+                    isActive={selectedRepo?.name === repo.name}
+                    onClick={() => onSelectRepo(repo)}
+                  >
+                    {repo.name}
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>
