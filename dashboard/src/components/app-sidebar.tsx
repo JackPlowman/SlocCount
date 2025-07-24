@@ -25,15 +25,13 @@ export default function AppSidebar({
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
   repositories: Array<RepoStats>;
-  selectedRepo: RepoStats;
-  onSelectRepo: (repo: RepoStats) => void;
+  selectedRepo: RepoStats | null;
+  onSelectRepo: (repo: RepoStats | null) => void;
 }) {
-  // Use a single sort state
   const [sort, setSort] = React.useState<
     "A-Z" | "Z-A" | "Largest" | "Smallest"
   >("A-Z");
 
-  // Derive displayRepos using useMemo
   const displayRepos = React.useMemo(() => {
     const sorted = [...repositories];
     switch (sort) {
@@ -49,12 +47,10 @@ export default function AppSidebar({
     }
   }, [repositories, sort]);
 
-  // Toggle sort order for name
   const handleSortByName = () => {
     setSort((currentSort) => (currentSort === "A-Z" ? "Z-A" : "A-Z"));
   };
 
-  // Toggle sort order for size
   const handleSortBySize = () => {
     setSort((currentSort) =>
       currentSort === "Largest" ? "Smallest" : "Largest",
@@ -70,7 +66,19 @@ export default function AppSidebar({
         <SearchForm className="mt-4" />
       </SidebarHeader>
       <SidebarContent>
-        {/* We create a SidebarGroup for each parent. */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Overview</SidebarGroupLabel>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <SidebarMenuButton
+                isActive={!selectedRepo}
+                onClick={() => onSelectRepo(null)}
+              >
+                All Repositories
+              </SidebarMenuButton>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarGroup>
         <SidebarGroup>
           <SidebarGroupLabel>Repositories</SidebarGroupLabel>
           <div className="flex flex-col gap-2 mt-2">

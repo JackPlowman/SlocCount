@@ -8,4 +8,12 @@ type RepoStats = {
   summary: LinesAndFilesChanged;
 };
 
-export type { LinesAndFilesChanged, RepoStats };
+type Data = {
+  total: {
+    lines: number;
+    files: number;
+  };
+  repositories: RepoStats[];
+};
+
+export type { Data, LinesAndFilesChanged, RepoStats };
