@@ -3,7 +3,7 @@ name = "scanner"
 dynamic = ["version"]
 requires-python = "~=3.13.0"
 dependencies = [
-  "gitpython==3.1.44",
+  "gitpython==3.1.45",
   "pygithub==2.6.1",
   "structlog==25.4.0",
   "pygount==3.1.0",
@@ -13,7 +13,7 @@ dependencies = [
 dev = [
   "pytest==8.4.1",
   "pytest-cov==6.2.1",
-  "ruff==0.12.4",
+  "ruff==0.12.5",
   "ty==0.0.1a15",
   "vulture==2.14",
 ]
