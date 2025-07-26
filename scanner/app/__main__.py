@@ -87,6 +87,7 @@ def analyse_repository_files(
                 "__unknown__",
                 "__empty__",
                 "__error__",
+                "__binary__",
             ]:
                 project_summary.add(file_analysis)
 
