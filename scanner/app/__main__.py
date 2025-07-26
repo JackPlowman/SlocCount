@@ -1,5 +1,6 @@
 from json import dump
 from pathlib import Path
+from timeit import default_timer
 
 from git import Repo, rmtree
 from pygount import ProjectSummary, SourceAnalysis
@@ -37,6 +38,7 @@ def run_analyser(configuration: Configuration) -> None:
     analysis: list[AnalysedRepository] = []
     total_repositories = len(list(repositories))
     for index, repository in enumerate(repositories):
+        start_time = default_timer()
         owner_name, repository_name = repository.owner.login, repository.name
         folder_path = clone_repo(owner_name, repository_name)
         project_summary = ProjectSummary()
@@ -55,6 +57,7 @@ def run_analyser(configuration: Configuration) -> None:
             project_summary=project_summary,
             progress=f"{index + 1}/{total_repositories}",
             progress_percentage=f"{(index + 1) / total_repositories * 100:.2f}%",
+            analysis_elapsed_time=f"{default_timer() - start_time:.2f} seconds",
         )
     generate_output(analysis)
 
