@@ -39,7 +39,7 @@
           "summary": {
             "type": "object",
             "description": "Summary statistics for the repository",
-            "required": ["lines", "files"],
+            "required": ["lines", "files", "commits"],
             "properties": {
               "lines": {
                 "type": "integer",
@@ -50,6 +50,10 @@
                 "type": "integer",
                 "minimum": 0,
                 "description": "Number of files in the repository"
+              },
+              "commits": {
+                "type": "array",
+                "description": "List of commits in the repository"
               }
             },
             "additionalProperties": false
