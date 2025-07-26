@@ -92,7 +92,7 @@ def analyse_repository_files(
             or any(file == ignore for ignore in IGNORE_FILES)
         ]
         for file in files_minus_excluded:
-            file_path = f"{_root.__str__()}/{file}"
+            file_path = str(_root / file)
             logger.debug("Analysing file", file=file_path)
             file_analysis = SourceAnalysis.from_file(file_path, repository_name)
             logger.debug("File analysis", file_analysis=file_analysis)
