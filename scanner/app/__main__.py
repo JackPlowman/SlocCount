@@ -92,7 +92,7 @@ def analyse_repository_files(
                 project_summary.add(file_analysis)
 
 
-def timeline_analysis(file_path: str, repository_name: str) -> dict:
+def timeline_analysis(file_path: str, repository_name: str) -> list[dict]:
     """Perform timeline analysis on the project summary.
 
     This function is a placeholder for the actual timeline analysis logic.
@@ -103,12 +103,11 @@ def timeline_analysis(file_path: str, repository_name: str) -> dict:
         repository_name (str): The name of the repository being analysed.
 
     Returns:
-        dict: A dictionary containing the timeline data, with commit dates as keys
-            and commit details as values.
+        list[dict]: A list of dictionaries containing commit details.
     """
     logger.debug("Performing timeline analysis")
     repository = Repo(file_path)
-    timeline_data = {}
+    timeline_data = []
     commits = list(repository.iter_commits())
     logger.debug("Total commits found", total_commits=len(commits))
     for index, commit in enumerate(commits):
@@ -124,12 +123,15 @@ def timeline_analysis(file_path: str, repository_name: str) -> dict:
         project_summary = ProjectSummary()
         analyse_repository_files(project_summary, file_path, repository_name)
         logger.debug("Project summary", project_summary=project_summary)
-        timeline_data[commit.committed_date] = {
-            "commit": commit.hexsha,
-            "message": commit.message,
-            "total_files": project_summary.total_file_count,
-            "total_lines": project_summary.total_line_count,
-        }
+        timeline_data.append(
+            {
+                "commit": commit.hexsha,
+                "commit_date": commit.committed_datetime.isoformat(),
+                "message": commit.message,
+                "total_files": project_summary.total_file_count,
+                "total_lines": project_summary.total_line_count,
+            }
+        )
 
     return timeline_data
 

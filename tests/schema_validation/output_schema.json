@@ -52,7 +52,7 @@
                 "description": "Number of files in the repository"
               },
               "commits": {
-                "type": "array",
+                "type": "object",
                 "description": "List of commits in the repository"
               }
             },
