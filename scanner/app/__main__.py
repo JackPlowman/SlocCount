@@ -15,6 +15,7 @@ logger: stdlib.BoundLogger = get_logger()
 
 def main() -> None:  # noqa: D103
     set_up_custom_logging()
+
     logger.info("Starting scanner")
     configuration = Configuration()
     try:
@@ -34,12 +35,13 @@ def run_analyser(configuration: Configuration) -> None:
     """
     repositories = retrieve_repositories(configuration)
     analysis: list[AnalysedRepository] = []
-    for repository in repositories:
+    total_repositories = len(list(repositories))
+    for index, repository in enumerate(repositories):
         owner_name, repository_name = repository.owner.login, repository.name
         folder_path = clone_repo(owner_name, repository_name)
         project_summary = ProjectSummary()
         analyse_repository_files(project_summary, folder_path, repository_name)
-        commits_analysis = timeline_analysis(folder_path)
+        commits_analysis = timeline_analysis(folder_path, repository_name)
         analysis.append(
             {
                 "name": repository_name,
@@ -47,7 +49,13 @@ def run_analyser(configuration: Configuration) -> None:
                 "commits": commits_analysis,
             }
         )
-        logger.info("Project summary", project_summary=project_summary)
+        logger.info(
+            "Project summary",
+            repository=repository_name,
+            project_summary=project_summary,
+            progress=f"{index + 1}/{total_repositories}",
+            progress_percentage=f"{(index + 1) / total_repositories * 100:.2f}%",
+        )
     generate_output(analysis)
 
 
@@ -80,7 +88,7 @@ def analyse_repository_files(
                 project_summary.add(file_analysis)
 
 
-def timeline_analysis(file_path: str) -> dict:
+def timeline_analysis(file_path: str, repository_name: str) -> dict:
     """Perform timeline analysis on the project summary.
 
     This function is a placeholder for the actual timeline analysis logic.
@@ -88,6 +96,7 @@ def timeline_analysis(file_path: str) -> dict:
 
     Args:
         file_path (str): The path to the cloned repository folder.
+        repository_name (str): The name of the repository being analysed.
 
     Returns:
         dict: A dictionary containing the timeline data, with commit dates as keys
@@ -97,13 +106,21 @@ def timeline_analysis(file_path: str) -> dict:
     repository = Repo(file_path)
     timeline_data = {}
     commits = list(repository.iter_commits())
-    for commit in commits:
-        logger.debug("Commit", commit=commit)
+    logger.debug("Total commits found", total_commits=len(commits))
+    for index, commit in enumerate(commits):
+        if index > 10:  # Limit to first 10 commits for performance
+            break
+        logger.debug(
+            "Commit Analysis",
+            commit=commit,
+            commit_date=commit.committed_date,
+            commit_percentage=index + 1 / len(commits),
+        )
         repository.git.checkout(commit.hexsha)
         project_summary = ProjectSummary()
-        analyse_repository_files(project_summary, file_path, repository.name)
+        analyse_repository_files(project_summary, file_path, repository_name)
         logger.debug("Project summary", project_summary=project_summary)
-        timeline_data[commit.date()] = {
+        timeline_data[commit.committed_date] = {
             "commit": commit.hexsha,
             "message": commit.message,
             "summary": project_summary,
@@ -130,6 +147,7 @@ def generate_output(analysis: list[AnalysedRepository]) -> None:
                     "lines": repository["summary"].total_line_count,
                     "files": repository["summary"].total_file_count,
                 },
+                "commits": repository["commits"],
             }
             for repository in analysis
         ],

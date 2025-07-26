@@ -31,17 +31,17 @@ def test_main(
 
 
 @patch(f"{FILE_PATH}.generate_output")
-@patch(f"{FILE_PATH}.SourceAnalysis")
+@patch(f"{FILE_PATH}.timeline_analysis")
+@patch(f"{FILE_PATH}.analyse_repository_files")
 @patch(f"{FILE_PATH}.clone_repo")
 @patch(f"{FILE_PATH}.retrieve_repositories")
 @patch(f"{FILE_PATH}.ProjectSummary")
-@patch(f"{FILE_PATH}.Path")
 def test_run_analyser(
-    mock_path: MagicMock,
     mock_project_summary: MagicMock,
     mock_retrieve_repositories: MagicMock,
     mock_clone_repo: MagicMock,
-    mock_source_analysis: MagicMock,
+    _mock_analyse_repository_files: MagicMock,
+    mock_timeline_analysis: MagicMock,
     mock_generate_output: MagicMock,
 ) -> None:
     """Test the run_analyser function."""
@@ -50,7 +50,6 @@ def test_run_analyser(
     repository_mock = MagicMock(owner=MagicMock(login="owner"))
     mock_retrieve_repositories.return_value = [repository_mock]
     mock_clone_repo.return_value = "cloned_repositories/repo"
-    mock_path.return_value.walk.return_value = [("root", [], ["file.py"])]
     mock_project_summary.return_value = MagicMock()
 
     # Act
@@ -59,13 +58,14 @@ def test_run_analyser(
     # Assert
     mock_retrieve_repositories.assert_called_once_with(mock_configuration)
     mock_clone_repo.assert_called_once_with("owner", repository_mock.name)
-    mock_path.assert_called_once_with("cloned_repositories/repo")
-    mock_project_summary.return_value.add.assert_called()
-    mock_source_analysis.from_file.assert_called_once_with(
-        "root/file.py", repository_mock.name
-    )
     mock_generate_output.assert_called_once_with(
-        [{"name": repository_mock.name, "summary": mock_project_summary.return_value}]
+        [
+            {
+                "name": repository_mock.name,
+                "summary": mock_project_summary.return_value,
+                "commits": mock_timeline_analysis.return_value,
+            }
+        ]
     )
 
 
@@ -78,10 +78,12 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
         {
             "name": "repo1",
             "summary": MagicMock(total_line_count=100, total_file_count=10),
+            "commits": [],
         },
         {
             "name": "repo2",
             "summary": MagicMock(total_line_count=200, total_file_count=20),
+            "commits": [],
         },
     ]
     mock_file = MagicMock()
@@ -93,8 +95,16 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
         {
             "total": {"lines": 300, "files": 30},
             "repositories": [
-                {"name": "repo1", "summary": {"lines": 100, "files": 10}},
-                {"name": "repo2", "summary": {"lines": 200, "files": 20}},
+                {
+                    "name": "repo1",
+                    "summary": {"lines": 100, "files": 10},
+                    "commits": [],
+                },
+                {
+                    "name": "repo2",
+                    "summary": {"lines": 200, "files": 20},
+                    "commits": [],
+                },
             ],
         },
         mock_file,
