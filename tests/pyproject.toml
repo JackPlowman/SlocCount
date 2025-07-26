@@ -5,8 +5,8 @@ requires-python = "~=3.13.0"
 dependencies = [
   "check-jsonschema==0.33.2",
   "pytest==8.4.1",
-  "ruff==0.12.4",
-  "ty==0.0.1a15",
+  "ruff==0.12.5",
+  "ty==0.0.1a16",
 ]
 
 [tool.uv]
