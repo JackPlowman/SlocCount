@@ -7,7 +7,7 @@ from structlog import get_logger, stdlib
 from .analysis import run_analyser
 from .configuration import Configuration
 from .custom_logging import set_up_custom_logging
-from .custom_types import AnalysedRepository, Output, Summary, Total
+from .custom_types import AnalysedRepository, Output, Total
 
 logger: stdlib.BoundLogger = get_logger()
 
@@ -40,17 +40,7 @@ def generate_output(analysis: list[AnalysedRepository]) -> None:
             lines=total_code_lines,
             files=total_files,
         ),
-        repositories=[
-            {
-                "name": repository.name,
-                "summary": Summary(
-                    lines=repository.summary.total_line_count,
-                    files=repository.summary.total_file_count,
-                ),
-                "commits": repository.commits,
-            }
-            for repository in analysis
-        ],
+        repositories=analysis,
     )
 
     with Path("output.json").open("w", encoding="utf-8") as file:
