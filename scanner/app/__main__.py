@@ -126,7 +126,8 @@ def timeline_analysis(file_path: str, repository_name: str) -> dict:
         timeline_data[commit.committed_date] = {
             "commit": commit.hexsha,
             "message": commit.message,
-            "summary": project_summary,
+            "total_files": project_summary.total_file_count,
+            "total_lines": project_summary.total_line_count,
         }
 
     return timeline_data
