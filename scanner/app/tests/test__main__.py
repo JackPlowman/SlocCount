@@ -92,7 +92,7 @@ def test_analyse_repository_files(
     # Assert
     mock_path.assert_called_once_with(folder_path)
     mock_source_analysis.from_file.assert_called_once_with(
-        "root/file.py", repository_name
+        str(mock_root.__truediv__("file.py")), repository_name
     )
     mock_project_summary.add.assert_called_once_with(
         mock_source_analysis.from_file.return_value
