@@ -53,6 +53,47 @@
               }
             },
             "additionalProperties": false
+          },
+          "commits": {
+            "type": "array",
+            "description": "Array of commits in the repository",
+            "items": {
+              "type": "object",
+              "required": [
+                "commit",
+                "commit_date",
+                "message",
+                "total_files",
+                "total_lines"
+              ],
+              "properties": {
+                "commit": {
+                  "type": "string",
+                  "minLength": 1,
+                  "description": "Commit hash"
+                },
+                "commit_date": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Commit date in ISO format"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Commit message"
+                },
+                "total_files": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total number of files at this commit"
+                },
+                "total_lines": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "description": "Total number of lines at this commit"
+                }
+              },
+              "additionalProperties": false
+            }
           }
         },
         "additionalProperties": false
