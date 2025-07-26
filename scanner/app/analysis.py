@@ -6,7 +6,7 @@ from pygount import ProjectSummary, SourceAnalysis
 from structlog import get_logger, stdlib
 
 from .configuration import Configuration
-from .custom_types import AnalysedRepository
+from .custom_types import AnalysedRepository, Commit, Summary
 from .github_interactions import clone_repo, retrieve_repositories
 
 logger: stdlib.BoundLogger = get_logger()
@@ -30,11 +30,14 @@ def run_analyser(configuration: Configuration) -> list[AnalysedRepository]:
         analyse_repository_files(project_summary, folder_path, repository_name)
         commits_analysis = timeline_analysis(folder_path, repository_name)
         analysis.append(
-            {
-                "name": repository_name,
-                "summary": project_summary,
-                "commits": commits_analysis,
-            }
+            AnalysedRepository(
+                name=repository_name,
+                summary=Summary(
+                    total_line_count=project_summary.total_line_count,
+                    total_file_count=project_summary.total_file_count,
+                ),
+                commits=commits_analysis,
+            )
         )
         logger.info(
             "Project summary",
@@ -118,13 +121,13 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[dict]:
         analyse_repository_files(project_summary, file_path, repository_name)
         logger.debug("Project summary", project_summary=project_summary)
         timeline_data.append(
-            {
-                "commit": commit.hexsha,
-                "commit_date": commit.committed_datetime.isoformat(),
-                "message": commit.message,
-                "total_files": project_summary.total_file_count,
-                "total_lines": project_summary.total_line_count,
-            }
+            Commit(
+                id=commit.hexsha,
+                message=commit.message.strip(),
+                date=commit.committed_datetime.isoformat(),
+                total_files=project_summary.total_file_count,
+                total_lines=project_summary.total_line_count,
+            )
         )
 
     return timeline_data
