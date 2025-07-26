@@ -25,11 +25,12 @@ def test_run_analyser(
     """Test the run_analyser function."""
     # Arrange
     mock_configuration = MagicMock(spec=Configuration)
-    repository_mock = MagicMock(owner=MagicMock(login="owner"))
+    repository_mock = MagicMock(owner=MagicMock(login="owner"), name="repo")
     mock_retrieve_repositories.return_value = [repository_mock]
     mock_clone_repo.return_value = "cloned_repositories/repo"
-    mock_project_summary.return_value = MagicMock()
-
+    mock_project_summary.return_value = MagicMock(
+        total_line_count=100, total_file_count=10
+    )
     # Act
     analysis = run_analyser(mock_configuration)
 
@@ -84,6 +85,9 @@ def test_timeline_analysis(
     """Test the timeline_analysis function."""
     # Arrange
     commit = MagicMock()
+    commit.hexsha = "1234567890abcdef"
+    commit.message = "Initial commit"
+    commit.committed_datetime.isoformat.return_value = "2023-10-01T12:00:00Z"
     mock_repo.return_value.iter_commits.return_value = [commit]
     folder_path = "test_folder"
     repository_name = "test_repo"

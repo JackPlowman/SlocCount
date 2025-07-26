@@ -2,6 +2,7 @@ from unittest.mock import MagicMock, patch
 
 from scanner.app.__main__ import (
     AnalysedRepository,
+    Summary,
     clean_up,
     generate_output,
     main,
@@ -33,23 +34,24 @@ def test_main(
 def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
     """Test the generate_output function."""
     # Arrange
-    analysis: list[AnalysedRepository] = [
-        {
-            "name": "repo1",
-            "summary": MagicMock(total_line_count=100, total_file_count=10),
-            "commits": [],
-        },
-        {
-            "name": "repo2",
-            "summary": MagicMock(total_line_count=200, total_file_count=20),
-            "commits": [],
-        },
+    analysis = [
+        AnalysedRepository(
+            name="repo1",
+            summary=Summary(total_line_count=100, total_file_count=10),
+            commits=[],
+        ),
+        AnalysedRepository(
+            name="repo2",
+            summary=Summary(total_line_count=200, total_file_count=20),
+            commits=[],
+        ),
     ]
     mock_file = MagicMock()
     mock_path.return_value.open.return_value.__enter__.return_value = mock_file
     # Act
     generate_output(analysis)
     # Assert
+    mock_path.return_value.open.assert_called_once_with("w", encoding="utf-8")
     mock_dump.assert_called_once_with(
         {
             "total": {"lines": 300, "files": 30},
@@ -70,7 +72,6 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
         indent=4,
         ensure_ascii=False,
     )
-    mock_path.return_value.open.assert_called_once_with("w", encoding="utf-8")
 
 
 @patch(f"{FILE_PATH}.rmtree")
