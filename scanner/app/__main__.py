@@ -62,6 +62,10 @@ def run_analyser(configuration: Configuration) -> None:
     generate_output(analysis)
 
 
+IGNORE_FOLDERS = [".git"]
+IGNORE_FILES = [".gitignore", ".json", ".lock"]
+
+
 def analyse_repository_files(
     project_summary: ProjectSummary, folder_path: str, repository_name: str
 ) -> None:
@@ -78,8 +82,17 @@ def analyse_repository_files(
     """
     iterator = Path(folder_path).walk()
     for _root, _dirs, files in iterator:
-        for file in files:
-            file_path = f"{_root.__str__()}/{file}"
+        if any(folder in _root.parts for folder in IGNORE_FOLDERS):
+            logger.debug("Skipping folder", folder=_root)
+            continue
+        files_minus_excluded = [
+            file
+            for file in files
+            if not any(file.endswith(ignore) for ignore in IGNORE_FILES)
+            or any(file == ignore for ignore in IGNORE_FILES)
+        ]
+        for file in files_minus_excluded:
+            file_path = str(_root / file)
             logger.debug("Analysing file", file=file_path)
             file_analysis = SourceAnalysis.from_file(file_path, repository_name)
             logger.debug("File analysis", file_analysis=file_analysis)
@@ -116,7 +129,7 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[dict]:
         logger.debug(
             "Commit Analysis",
             commit=commit,
-            commit_date=commit.committed_date,
+            commit_date=commit.committed_datetime.isoformat(),
             commit_percentage=index + 1 / len(commits),
         )
         repository.git.checkout(commit.hexsha)

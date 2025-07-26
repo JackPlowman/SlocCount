@@ -83,7 +83,10 @@ def test_analyse_repository_files(
     # Arrange
     folder_path = "test_folder"
     repository_name = "test_repo"
-    mock_path.return_value.walk.return_value = [("root", [], ["file.py"])]
+    mock_root = MagicMock()
+    mock_root.parts = ("root",)
+    mock_root.__str__.return_value = "root"
+    mock_path.return_value.walk.return_value = [(mock_root, [], ["file.py"])]
     # Act
     analyse_repository_files(mock_project_summary, folder_path, repository_name)
     # Assert
