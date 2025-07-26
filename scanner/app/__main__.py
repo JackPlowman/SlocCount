@@ -1,7 +1,7 @@
 from json import dump
 from pathlib import Path
 
-from git import rmtree
+from git import Repo, rmtree
 from pygount import ProjectSummary, SourceAnalysis
 from structlog import get_logger, stdlib
 
@@ -38,22 +38,78 @@ def run_analyser(configuration: Configuration) -> None:
         owner_name, repository_name = repository.owner.login, repository.name
         folder_path = clone_repo(owner_name, repository_name)
         project_summary = ProjectSummary()
-        iterator = Path(folder_path).walk()
-        for _root, _dirs, files in iterator:
-            for file in files:
-                file_path = f"{_root.__str__()}/{file}"
-                logger.debug("Analysing file", file=file_path)
-                file_analysis = SourceAnalysis.from_file(file_path, repository_name)
-                logger.debug("File analysis", file_analysis=file_analysis)
-                if file_analysis.language not in [
-                    "__unknown__",
-                    "__empty__",
-                    "__error__",
-                ]:
-                    project_summary.add(file_analysis)
-        analysis.append({"name": repository_name, "summary": project_summary})
+        analyse_repository_files(project_summary, folder_path, repository_name)
+        commits_analysis = timeline_analysis(folder_path)
+        analysis.append(
+            {
+                "name": repository_name,
+                "summary": project_summary,
+                "commits": commits_analysis,
+            }
+        )
         logger.info("Project summary", project_summary=project_summary)
     generate_output(analysis)
+
+
+def analyse_repository_files(
+    project_summary: ProjectSummary, folder_path: str, repository_name: str
+) -> None:
+    """Analyse the files in the repository.
+
+    This function iterates through the files in the repository and performs analysis
+    on each file, adding the results to the project summary.
+
+    Args:
+        project_summary (ProjectSummary): The summary object to which file analyses
+            are added.
+        folder_path (str): The path to the cloned repository folder.
+        repository_name (str): The name of the repository being analysed.
+    """
+    iterator = Path(folder_path).walk()
+    for _root, _dirs, files in iterator:
+        for file in files:
+            file_path = f"{_root.__str__()}/{file}"
+            logger.debug("Analysing file", file=file_path)
+            file_analysis = SourceAnalysis.from_file(file_path, repository_name)
+            logger.debug("File analysis", file_analysis=file_analysis)
+            if file_analysis.language not in [
+                "__unknown__",
+                "__empty__",
+                "__error__",
+            ]:
+                project_summary.add(file_analysis)
+
+
+def timeline_analysis(file_path: str) -> dict:
+    """Perform timeline analysis on the project summary.
+
+    This function is a placeholder for the actual timeline analysis logic.
+    Currently, it does not perform any operations.
+
+    Args:
+        file_path (str): The path to the cloned repository folder.
+
+    Returns:
+        dict: A dictionary containing the timeline data, with commit dates as keys
+            and commit details as values.
+    """
+    logger.debug("Performing timeline analysis")
+    repository = Repo(file_path)
+    timeline_data = {}
+    commits = list(repository.iter_commits())
+    for commit in commits:
+        logger.debug("Commit", commit=commit)
+        repository.git.checkout(commit.hexsha)
+        project_summary = ProjectSummary()
+        analyse_repository_files(project_summary, file_path, repository.name)
+        logger.debug("Project summary", project_summary=project_summary)
+        timeline_data[commit.date()] = {
+            "commit": commit.hexsha,
+            "message": commit.message,
+            "summary": project_summary,
+        }
+
+    return timeline_data
 
 
 def generate_output(analysis: list[AnalysedRepository]) -> None:
