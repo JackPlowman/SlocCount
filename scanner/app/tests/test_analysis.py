@@ -88,7 +88,6 @@ def test_timeline_analysis(
     # Arrange
     commit = MagicMock()
     commit.hexsha = "1234567890abcdef"
-    commit.message = "Initial commit"
     commit.committed_datetime.isoformat.return_value = "2023-10-01T12:00:00Z"
     mock_repo.return_value.iter_commits.return_value = [commit]
     folder_path = "test_folder"

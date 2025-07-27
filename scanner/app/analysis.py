@@ -1,11 +1,11 @@
 from pathlib import Path
 from timeit import default_timer
 
+from date import date
+from dateutil.relativedelta import relativedelta
 from git import Repo
 from pygount import ProjectSummary, SourceAnalysis
 from structlog import get_logger, stdlib
-from datetime import datetime, timedelta
-from dateutil.relativedelta import relativedelta
 
 from .configuration import Configuration
 from .custom_types import AnalysedRepository, Commit, Summary
@@ -23,7 +23,6 @@ def run_analyser(configuration: Configuration) -> list[AnalysedRepository]:
     """
     repositories = retrieve_repositories(configuration)
     analysis: list[AnalysedRepository] = []
-    raise NotImplementedError()
     total_repositories = len(list(repositories))
     for index, repository in enumerate(repositories):
         start_time = default_timer()
@@ -95,7 +94,7 @@ def analyse_repository_files(
 def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
     """Perform timeline analysis on the project summary.
 
-    This function analyzes the first commit of each month from the repository's
+    This function analyses the first commit of each month from the repository's
     first commit to the current date. If no commit exists in a month, it uses
     the stats from the previous month.
 
@@ -115,23 +114,25 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
         return []
 
     first_commit = commits[0]
-    first_commit_date = first_commit.committed_datetime.replace(tzinfo=None)
-    current_date = datetime.now()
+    first_commit_date = first_commit.committed_datetime.date()
+    current_date = date.today()
 
     logger.debug(
         "Timeline analysis range",
         first_commit=first_commit.hexsha,
         first_commit_date=first_commit_date.strftime("%m/%Y"),
-        current_date=current_date.strftime("%m/%Y")
+        current_date=current_date.strftime("%m/%Y"),
     )
 
     # Build monthly timeline
     timeline_data = []
-    current_month = first_commit_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    end_month = current_date.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    # Ensure both are offset-naive
-    current_month = current_month.replace(tzinfo=None)
-    end_month = end_month.replace(tzinfo=None)
+    current_month = first_commit_date.replace(day=1)
+    end_month = current_date.replace(day=1)
+    logger.debug(
+        "Timeline analysis months",
+        start_month=current_month.strftime("%m/%Y"),
+        end_month=end_month.strftime("%m/%Y"),
+    )
 
     previous_month_data = None
 
@@ -141,26 +142,26 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
         # Find first commit in this month
         month_commit = None
         for commit in commits:
-            commit_date = commit.committed_datetime.replace(tzinfo=None)
+            commit_date = commit.committed_datetime.date()
             if current_month <= commit_date < next_month:
                 month_commit = commit
                 break
 
         if month_commit:
             logger.debug(
-                "Analyzing commit for month",
+                "Analysing commit for month",
                 month=current_month.strftime("%m/%Y"),
-                commit=month_commit.hexsha
+                commit=month_commit.hexsha,
             )
 
-            # Checkout and analyze this commit
+            # Checkout and analyse this commit
             repository.git.checkout(month_commit.hexsha)
             project_summary = ProjectSummary()
             analyse_repository_files(project_summary, file_path, repository_name)
 
             commit_data = Commit(
                 id=month_commit.hexsha,
-                date=current_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat(),
+                date=current_month.replace(day=1).isoformat(),
                 total_files=project_summary.total_file_count,
                 total_lines=project_summary.total_line_count,
             )
@@ -170,16 +171,18 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
         elif previous_month_data:
             logger.debug(
                 "No commit found for month, using previous month's data",
-                month=current_month.strftime("%m/%Y")
+                month=current_month.strftime("%m/%Y"),
             )
 
             # Use previous month's data but update the date
-            timeline_data.append(Commit(
-                id=previous_month_data.id,
-                date=current_month.replace(day=1, hour=0, minute=0, second=0, microsecond=0).isoformat(),
-                total_files=previous_month_data.total_files,
-                total_lines=previous_month_data.total_lines,
-            ))
+            timeline_data.append(
+                Commit(
+                    id=previous_month_data.id,
+                    date=current_month.replace(day=1).isoformat(),
+                    total_files=previous_month_data.total_files,
+                    total_lines=previous_month_data.total_lines,
+                )
+            )
 
         current_month = next_month
 
