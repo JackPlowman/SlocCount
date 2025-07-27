@@ -89,7 +89,7 @@ def analyse_repository_files(
                 project_summary.add(file_analysis)
 
 
-def timeline_analysis(file_path: str, repository_name: str) -> list[dict]:
+def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
     """Perform timeline analysis on the project summary.
 
     This function is a placeholder for the actual timeline analysis logic.
@@ -100,7 +100,7 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[dict]:
         repository_name (str): The name of the repository being analysed.
 
     Returns:
-        list[dict]: A list of dictionaries containing commit details.
+        list[Commit]: A list of Commit objects representing the timeline analysis.
     """
     logger.debug("Performing timeline analysis")
     repository = Repo(file_path)
