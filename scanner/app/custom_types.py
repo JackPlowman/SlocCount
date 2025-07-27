@@ -5,7 +5,6 @@ class Commit(BaseModel):
     """Pydantic model for Commit."""
 
     id: str
-    message: str
     date: str
     total_files: int
     total_lines: int
