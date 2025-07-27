@@ -2,11 +2,11 @@ from unittest.mock import MagicMock, patch
 
 from scanner.app.__main__ import (
     AnalysedRepository,
-    Summary,
     clean_up,
     generate_output,
     main,
 )
+from scanner.app.custom_types import Summary
 
 FILE_PATH = "scanner.app.__main__"
 
@@ -58,12 +58,12 @@ def test_generate_output(mock_dump: MagicMock, mock_path: MagicMock) -> None:
             "repositories": [
                 {
                     "name": "repo1",
-                    "summary": {"lines": 100, "files": 10},
+                    "summary": {"total_line_count": 100, "total_file_count": 10},
                     "commits": [],
                 },
                 {
                     "name": "repo2",
-                    "summary": {"lines": 200, "files": 20},
+                    "summary": {"total_line_count": 200, "total_file_count": 20},
                     "commits": [],
                 },
             ],
