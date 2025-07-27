@@ -6,6 +6,7 @@ from scanner.app.analysis import (
     run_analyser,
     timeline_analysis,
 )
+from scanner.app.custom_types import AnalysedRepository, Summary
 
 FILE_PATH = "scanner.app.analysis"
 
@@ -20,16 +21,18 @@ def test_run_analyser(
     mock_retrieve_repositories: MagicMock,
     mock_clone_repo: MagicMock,
     _mock_analyse_repository_files: MagicMock,
-    mock_timeline_analysis: MagicMock,
+    _mock_timeline_analysis: MagicMock,
 ) -> None:
     """Test the run_analyser function."""
     # Arrange
     mock_configuration = MagicMock(spec=Configuration)
     repository_mock = MagicMock(owner=MagicMock(login="owner"))
+    repository_mock.name = "repo"
     mock_retrieve_repositories.return_value = [repository_mock]
     mock_clone_repo.return_value = "cloned_repositories/repo"
-    mock_project_summary.return_value = MagicMock()
-
+    mock_project_summary.return_value = MagicMock(
+        total_line_count=100, total_file_count=10
+    )
     # Act
     analysis = run_analyser(mock_configuration)
 
@@ -37,11 +40,11 @@ def test_run_analyser(
     mock_retrieve_repositories.assert_called_once_with(mock_configuration)
     mock_clone_repo.assert_called_once_with("owner", repository_mock.name)
     assert [
-        {
-            "name": repository_mock.name,
-            "summary": mock_project_summary.return_value,
-            "commits": mock_timeline_analysis.return_value,
-        }
+        AnalysedRepository(
+            name="repo",
+            summary=Summary(total_line_count=100, total_file_count=10),
+            commits=[],
+        )
     ] == analysis
 
 
@@ -84,6 +87,9 @@ def test_timeline_analysis(
     """Test the timeline_analysis function."""
     # Arrange
     commit = MagicMock()
+    commit.hexsha = "1234567890abcdef"
+    commit.message = "Initial commit"
+    commit.committed_datetime.isoformat.return_value = "2023-10-01T12:00:00Z"
     mock_repo.return_value.iter_commits.return_value = [commit]
     folder_path = "test_folder"
     repository_name = "test_repo"

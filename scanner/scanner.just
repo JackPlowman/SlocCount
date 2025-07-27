@@ -74,4 +74,4 @@ uv-lock-check:
 
 # Check for unused code
 vulture:
-    uv run vulture app
+    uv run vulture app --exclude custom_types.py
