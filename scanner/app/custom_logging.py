@@ -19,7 +19,7 @@ def set_up_custom_logging() -> None:
     level = INFO
     if getenv("INPUT_DEBUG", "false").lower() == "true":
         level = DEBUG
-    if not getenv("CI"):
+    if getenv("CI"):
         configure(
             processors=[
                 structlog_dev.ConsoleRenderer(
