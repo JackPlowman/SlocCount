@@ -1,7 +1,7 @@
 from pathlib import Path
 from timeit import default_timer
 
-from date import date
+from date import today
 from dateutil.relativedelta import relativedelta
 from git import Repo
 from pygount import ProjectSummary, SourceAnalysis
@@ -115,7 +115,12 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
 
     first_commit = commits[0]
     first_commit_date = first_commit.committed_datetime.date()
-    current_date = date.today()
+    logger.warning(
+        "First commit found",
+        first_commit=first_commit.hexsha,
+        first_commit_date=first_commit_date.isoformat(),
+    )
+    current_date = today()
 
     logger.debug(
         "Timeline analysis range",
