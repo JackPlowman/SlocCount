@@ -1,4 +1,3 @@
-
 from playwright.sync_api import Page, expect
 
 from .utils.environment_variables import PROJECT_URL
