@@ -1,3 +1,4 @@
+from datetime import date
 from unittest.mock import MagicMock, patch
 
 from scanner.app.analysis import (
@@ -79,23 +80,42 @@ def test_analyse_repository_files(
 @patch(f"{FILE_PATH}.ProjectSummary")
 @patch(f"{FILE_PATH}.analyse_repository_files")
 @patch(f"{FILE_PATH}.Repo")
+@patch(f"{FILE_PATH}.date")
 def test_timeline_analysis(
+    mock_date: MagicMock,
     mock_repo: MagicMock,
     mock_analyse_repository_files: MagicMock,
     mock_project_summary: MagicMock,
 ) -> None:
     """Test the timeline_analysis function."""
     # Arrange
-    commit = MagicMock()
-    commit.hexsha = "1234567890abcdef"
-    commit.message = "Initial commit"
-    commit.committed_datetime.isoformat.return_value = "2023-10-01T12:00:00Z"
-    mock_repo.return_value.iter_commits.return_value = [commit]
+    mock_date.today.return_value = date(2023, 12, 1)
+    commit1 = MagicMock()
+    commit1.hexsha = "commit1"
+    commit1.committed_datetime.date.return_value = date(2023, 10, 15)
+    commit2 = MagicMock()
+    commit2.hexsha = "commit2"
+    commit2.committed_datetime.date.return_value = date(2023, 11, 20)
+    mock_repository = mock_repo.return_value
+    mock_repository.iter_commits.return_value = [commit2, commit1]
+    mock_summary = mock_project_summary.return_value
+    mock_summary.total_file_count = 5
+    mock_summary.total_line_count = 100
     folder_path = "test_folder"
     repository_name = "test_repo"
     # Act
-    timeline_analysis(folder_path, repository_name)
+    result = timeline_analysis(folder_path, repository_name)
     # Assert
-    mock_analyse_repository_files.assert_called_once_with(
-        mock_project_summary.return_value, folder_path, repository_name
-    )
+    mock_repo.assert_called_once_with(folder_path)
+    mock_repository.iter_commits.assert_called_once_with(all=True)
+    assert mock_repository.git.checkout.call_count == 2
+    mock_repository.git.checkout.assert_any_call("commit1")
+    mock_repository.git.checkout.assert_any_call("commit2")
+    assert mock_analyse_repository_files.call_count == 2
+    assert len(result) == 3
+    assert result[0].id == "commit1"
+    assert result[0].date == "2023-10-01"
+    assert result[1].id == "commit2"
+    assert result[1].date == "2023-11-01"
+    assert result[2].id == "commit2"
+    assert result[2].date == "2023-12-01"
