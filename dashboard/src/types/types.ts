@@ -1,11 +1,11 @@
-type LinesAndFilesChanged = {
-  lines: number;
-  files: number;
+type RepositorySummary = {
+  total_line_count: number;
+  total_file_count: number;
 };
 
 type RepoStats = {
   name: string;
-  summary: LinesAndFilesChanged;
+  summary: RepositorySummary;
 };
 
 type Data = {
@@ -16,4 +16,4 @@ type Data = {
   repositories: RepoStats[];
 };
 
-export type { Data, LinesAndFilesChanged, RepoStats };
+export type { Data, RepoStats, RepositorySummary };
