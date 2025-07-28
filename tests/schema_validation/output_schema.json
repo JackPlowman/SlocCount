@@ -1,104 +1,78 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://example.com/sloc-count-output.schema.json",
-  "title": "SlocCount Output Schema",
-  "description": "Schema for SlocCount tool output containing repository statistics",
   "type": "object",
-  "required": ["total", "repositories"],
   "properties": {
     "total": {
       "type": "object",
-      "description": "Total statistics across all repositories",
-      "required": ["lines", "files"],
       "properties": {
         "lines": {
           "type": "integer",
-          "minimum": 0,
-          "description": "Total number of lines across all repositories"
+          "minimum": 0
         },
         "files": {
           "type": "integer",
-          "minimum": 0,
-          "description": "Total number of files across all repositories"
+          "minimum": 0
         }
       },
+      "required": ["lines", "files"],
       "additionalProperties": false
     },
     "repositories": {
       "type": "array",
-      "description": "Array of repository statistics",
       "items": {
         "type": "object",
-        "required": ["name", "summary"],
         "properties": {
           "name": {
             "type": "string",
-            "minLength": 1,
-            "description": "Name of the repository"
+            "minLength": 1
           },
           "summary": {
             "type": "object",
-            "description": "Summary statistics for the repository",
-            "required": ["lines", "files"],
             "properties": {
-              "lines": {
+              "total_line_count": {
                 "type": "integer",
-                "minimum": 0,
-                "description": "Number of lines in the repository"
+                "minimum": 0
               },
-              "files": {
+              "total_file_count": {
                 "type": "integer",
-                "minimum": 0,
-                "description": "Number of files in the repository"
+                "minimum": 0
               }
             },
+            "required": ["total_line_count", "total_file_count"],
             "additionalProperties": false
           },
           "commits": {
             "type": "array",
-            "description": "Array of commits in the repository",
             "items": {
               "type": "object",
-              "required": [
-                "commit",
-                "commit_date",
-                "message",
-                "total_files",
-                "total_lines"
-              ],
               "properties": {
-                "commit": {
+                "id": {
                   "type": "string",
-                  "minLength": 1,
-                  "description": "Commit hash"
+                  "pattern": "^[a-f0-9]{40}$"
                 },
-                "commit_date": {
+                "date": {
                   "type": "string",
-                  "format": "date-time",
-                  "description": "Commit date in ISO format"
-                },
-                "message": {
-                  "type": "string",
-                  "description": "Commit message"
+                  "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
                 },
                 "total_files": {
                   "type": "integer",
-                  "minimum": 0,
-                  "description": "Total number of files at this commit"
+                  "minimum": 0
                 },
                 "total_lines": {
                   "type": "integer",
-                  "minimum": 0,
-                  "description": "Total number of lines at this commit"
+                  "minimum": 0
                 }
               },
+              "required": ["id", "date", "total_files", "total_lines"],
               "additionalProperties": false
             }
           }
         },
+        "required": ["name", "summary", "commits"],
         "additionalProperties": false
       }
     }
   },
+  "required": ["total", "repositories"],
   "additionalProperties": false
 }
