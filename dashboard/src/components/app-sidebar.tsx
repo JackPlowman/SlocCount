@@ -38,9 +38,9 @@ export default function AppSidebar({
       case "Z-A":
         return sorted.sort((a, b) => b.name.localeCompare(a.name));
       case "Largest":
-        return sorted.sort((a, b) => b.summary.lines - a.summary.lines);
+        return sorted.sort((a, b) => b.summary.total_line_count - a.summary.total_line_count);
       case "Smallest":
-        return sorted.sort((a, b) => a.summary.lines - b.summary.lines);
+        return sorted.sort((a, b) => a.summary.total_line_count - b.summary.total_line_count);
       case "A-Z":
       default:
         return sorted.sort((a, b) => a.name.localeCompare(b.name));

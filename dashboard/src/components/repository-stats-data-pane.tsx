@@ -14,13 +14,13 @@ export default function RepositoryStatsDataPane({
           <div className="bg-gray-100 rounded-lg flex flex-col items-center justify-center h-24 text-lg font-semibold border border-gray-300">
             Total Files:
             <span className="text-2xl font-bold mt-1">
-              {repo.summary.files}
+              {repo.summary.total_file_count}
             </span>
           </div>
           <div className="bg-gray-100 rounded-lg flex flex-col items-center justify-center h-24 text-lg font-semibold border border-gray-300">
             Total Lines:
             <span className="text-2xl font-bold mt-1">
-              {repo.summary.lines}
+              {repo.summary.total_line_count}
             </span>
           </div>
           <div className="bg-gray-100 rounded-lg flex flex-col items-center justify-center h-24 text-lg font-semibold border border-gray-300">
