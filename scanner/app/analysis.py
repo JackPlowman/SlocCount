@@ -1,7 +1,7 @@
+from datetime import date
 from pathlib import Path
 from timeit import default_timer
 
-from date import today
 from dateutil.relativedelta import relativedelta
 from git import Repo
 from pygount import ProjectSummary, SourceAnalysis
@@ -29,7 +29,9 @@ def run_analyser(configuration: Configuration) -> list[AnalysedRepository]:
         owner_name, repository_name = repository.owner.login, repository.name
         folder_path = clone_repo(owner_name, repository_name)
         project_summary = ProjectSummary()
-        analyse_repository_files(project_summary, folder_path, repository_name)
+        analyse_repository_files(
+            project_summary, folder_path, repository_name, debug_log_per_file=True
+        )
         commits_analysis = timeline_analysis(folder_path, repository_name)
         analysis.append(
             AnalysedRepository(
@@ -53,7 +55,10 @@ def run_analyser(configuration: Configuration) -> list[AnalysedRepository]:
 
 
 def analyse_repository_files(
-    project_summary: ProjectSummary, folder_path: str, repository_name: str
+    project_summary: ProjectSummary,
+    folder_path: str,
+    repository_name: str,
+    debug_log_per_file: bool = False,
 ) -> None:
     """Analyse the files in the repository.
 
@@ -65,6 +70,7 @@ def analyse_repository_files(
             are added.
         folder_path (str): The path to the cloned repository folder.
         repository_name (str): The name of the repository being analysed.
+        debug_log_per_file (bool): If True, logs detailed information for each file.
     """
     iterator = Path(folder_path).walk()
     for _root, _dirs, files in iterator:
@@ -79,9 +85,11 @@ def analyse_repository_files(
         ]
         for file in files_minus_excluded:
             file_path = str(_root / file)
-            logger.debug("Analysing file", file=file_path)
             file_analysis = SourceAnalysis.from_file(file_path, repository_name)
-            logger.debug("File analysis", file_analysis=file_analysis)
+            if debug_log_per_file:
+                logger.debug(
+                    "File analysis", file=file_path, file_analysis=file_analysis
+                )
             if file_analysis.language not in [
                 "__unknown__",
                 "__empty__",
@@ -107,7 +115,7 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
     """
     logger.debug("Performing timeline analysis")
     repository = Repo(file_path)
-    commits = list(repository.iter_commits())
+    commits = list(reversed(list(repository.iter_commits(all=True))))
 
     if not commits:
         logger.warning("No commits found in repository")
@@ -120,7 +128,7 @@ def timeline_analysis(file_path: str, repository_name: str) -> list[Commit]:
         first_commit=first_commit.hexsha,
         first_commit_date=first_commit_date.isoformat(),
     )
-    current_date = today()
+    current_date = date.today()  # noqa: DTZ011
 
     logger.debug(
         "Timeline analysis range",
