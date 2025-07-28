@@ -1,3 +1,13 @@
+# ------------------------------------------------------------------------------
+# Environment Variables
+# ------------------------------------------------------------------------------
+
+export DEFAULT_PROJECT_URL := "https://jackplowman.github.io/SlocCount"
+
+# ------------------------------------------------------------------------------
+# General Commands
+# ------------------------------------------------------------------------------
+
 # Install python dependencies
 install:
     uv sync --all-extras
@@ -5,6 +15,18 @@ install:
 # Validate the JSON schema
 validate-schema:
     uv run check-jsonschema --schemafile schema_validation/output_schema.json schema_validation/output.json
+
+# Run End-to-End Tests
+run $PROJECT_URL=DEFAULT_PROJECT_URL $browser="chromium":
+    uv run pytest ui -vv --reruns 2 --browser ${browser}
+
+# Run End-to-End Tests in a specific browser
+run-ci $browser:
+    just tests::run $DEFAULT_PROJECT_URL ${browser}
+
+# Install playwright dependencies
+playwright-install:
+    uv run playwright install --with-deps
 
 # ------------------------------------------------------------------------------
 # Ruff - Python Linting and Formatting
