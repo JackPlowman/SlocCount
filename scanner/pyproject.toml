@@ -7,7 +7,7 @@ dependencies = [
   "pydantic==2.11.7",
   "pygithub==2.6.1",
   "pygount==3.1.0",
-  "python-dateutil==2.9.0",
+  "python-dateutil==2.9.0.post0",
   "structlog==25.4.0",
 ]
 
