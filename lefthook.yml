@@ -20,6 +20,8 @@ pre-commit:
       run: just zizmor-check
     Pinact Verify:
       run: just pinact-check
+    Actionlint Checks:
+      run: just actionlint-check
     EditorConfig Check:
       run: just editorconfig-check
     Ruff Checks:
