@@ -63,7 +63,7 @@ jobs:
       actions: read
       pull-requests: write
       security-events: write
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@e30aab8ee9515b2bf9326a17e1476d4025dcd554 # v2025.07.28.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@3247419e78d8921f39ce9bb46d47787a3b5f537b # v2025.08.04.01
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -75,7 +75,7 @@ jobs:
     strategy:
       matrix:
         language: [actions, typescript, python]
-    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@e30aab8ee9515b2bf9326a17e1476d4025dcd554 # v2025.07.28.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@3247419e78d8921f39ce9bb46d47787a3b5f537b # v2025.08.04.01
     with:
       language: ${{ matrix.language }}
 
@@ -119,7 +119,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.29.4
+        uses: github/codeql-action/upload-sarif@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
         with:
           sarif_file: scanner/ruff-results.sarif
           wait-for-processing: true
@@ -213,7 +213,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.29.4
+        uses: github/codeql-action/upload-sarif@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
         with:
           sarif_file: tests/ruff-results.sarif
           wait-for-processing: true
@@ -289,7 +289,7 @@ jobs:
         run: just dashboard::eslint-with-sarif
         continue-on-error: true
       - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@4e828ff8d448a8a6e532957b1811f387a63867e8 # v3.29.4
+        uses: github/codeql-action/upload-sarif@51f77329afa6477de8c49fc9c7046c15b9a4e79d # v3.29.5
         with:
           sarif_file: dashboard/eslint-results.sarif
           wait-for-processing: true
