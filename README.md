@@ -10,7 +10,7 @@ Count the number of source lines of code (SLOC) in my projects. As well as a sum
   - [Table of Contents](#table-of-contents)
   - [Architecture](#architecture)
   - [Contributing](#contributing)
-  - [License](#license)
+  - [Licence](#licence)
 
 ## Architecture
 
@@ -20,6 +20,6 @@ Count the number of source lines of code (SLOC) in my projects. As well as a sum
 
 We welcome contributions to the project. Please read the [Contributing Guidelines](docs/CONTRIBUTING.md) for more information.
 
-## License
+## Licence
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT Licence. See the [LICENCE](LICENCE) file for details.
