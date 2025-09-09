@@ -5,7 +5,7 @@ requires-python = "~=3.13.0"
 dependencies = [
   "gitpython==3.1.45",
   "pydantic==2.11.7",
-  "pygithub==2.6.1",
+  "pygithub==2.8.1",
   "pygount==3.1.0",
   "python-dateutil==2.9.0",
   "structlog==25.4.0",
@@ -13,9 +13,9 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "pytest-cov==6.2.1",
-  "pytest==8.4.1",
-  "ruff==0.12.5",
+  "pytest-cov==6.3.0",
+  "pytest==8.4.2",
+  "ruff==0.12.12",
   "ty==0.0.1a16",
   "vulture==2.14",
 ]
