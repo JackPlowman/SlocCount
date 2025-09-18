@@ -4,8 +4,8 @@ dynamic = ["version"]
 requires-python = "~=3.13.0"
 dependencies = [
   "gitpython==3.1.45",
-  "pydantic==2.11.7",
-  "pygithub==2.6.1",
+  "pydantic==2.11.9",
+  "pygithub==2.8.1",
   "pygount==3.1.0",
   "python-dateutil==2.9.0",
   "structlog==25.4.0",
@@ -13,17 +13,16 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = [
-  "pytest-cov==6.2.1",
-  "pytest==8.4.1",
-  "ruff==0.12.5",
-  "ty==0.0.1a16",
+  "pytest-cov==7.0.0",
+  "pytest==8.4.2",
+  "ruff==0.13.1",
+  "ty==0.0.1a20",
   "vulture==2.14",
 ]
 
 [tool.uv]
 required-version = "~=0.8.0"
 package = false
-override-dependencies = ["urllib3==2.5.0", "requests==2.32.4"]
 
 [tool.setuptools]
 py-modules = ["app", "cloned_repositories"]
