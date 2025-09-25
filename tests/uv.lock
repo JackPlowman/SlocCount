@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = "==3.13.*"
 
 [[package]]
@@ -44,7 +44,7 @@ wheels = [
 
 [[package]]
 name = "check-jsonschema"
-version = "0.33.3"
+version = "0.34.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "click" },
@@ -53,9 +53,9 @@ dependencies = [
     { name = "requests" },
     { name = "ruamel-yaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1f/7e/52eee4df68e838866280ab95b4440494f7a2c568b6fea86d44a8fca17415/check_jsonschema-0.33.3.tar.gz", hash = "sha256:8cdb74660b56b748ef768aee9dc0cdfca9e7420e1d5300d0e2792704af53676f", size = 293882, upload-time = "2025-08-18T01:52:55.887Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/9e/48/be9cb9144328042b66110ed58eabdbba0f64eded54be1a659ec72a5d939e/check_jsonschema-0.34.0.tar.gz", hash = "sha256:7ff811bbd6d3936a9729375fb1e42835ecdc3758d837e2c67330c738a8b4945f", size = 310166, upload-time = "2025-09-18T01:46:26.117Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3a/9b/7c9c8fc1c198e9dd9625f6c6b3948a562ede506fc6792404837f42bd5a65/check_jsonschema-0.33.3-py3-none-any.whl", hash = "sha256:db4385a4d48b1c79b29c36181e6305c401b956d84e2f8e74f29e5d58a2eaf9cd", size = 279605, upload-time = "2025-08-18T01:52:54.013Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/60/ac05c3366833b04af1901c776730f0daba5bb5d8dc805706a77938e37661/check_jsonschema-0.34.0-py3-none-any.whl", hash = "sha256:7acb8abf31e28abedca4572435a94e6cf5392aa750b926c77e450d1088389aee", size = 295042, upload-time = "2025-09-18T01:46:24.243Z" },
 ]
 
 [[package]]
@@ -239,7 +239,7 @@ wheels = [
 
 [[package]]
 name = "pytest-playwright"
-version = "0.7.0"
+version = "0.7.1"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "playwright" },
@@ -247,9 +247,9 @@ dependencies = [
     { name = "pytest-base-url" },
     { name = "python-slugify" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e3/47/38e292ad92134a00ea05e6fc4fc44577baaa38b0922ab7ea56312b7a6663/pytest_playwright-0.7.0.tar.gz", hash = "sha256:b3f2ea514bbead96d26376fac182f68dcd6571e7cb41680a89ff1673c05d60b6", size = 16666, upload-time = "2025-01-31T11:06:05.453Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/a0/1e/9771990bad2b59d37728c4b6f28c234b3badbb2494bd72d54a6e2a988e23/pytest_playwright-0.7.1.tar.gz", hash = "sha256:94b551b2677ecdc16284fcd6a4f0045eafda47a60e74410f3fe4d8260e12cabf", size = 16769, upload-time = "2025-09-08T08:10:53.765Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/d8/96/5f8a4545d783674f3de33f0ebc4db16cc76ce77a4c404d284f43f09125e3/pytest_playwright-0.7.0-py3-none-any.whl", hash = "sha256:2516d0871fa606634bfe32afbcc0342d68da2dbff97fe3459849e9c428486da2", size = 16618, upload-time = "2025-01-31T11:06:08.075Z" },
+    { url = "https://files.pythonhosted.org/packages/dd/59/373da90ce6a1a46ca6a449bf16cea11a3c6e269814eb60e7668526350b95/pytest_playwright-0.7.1-py3-none-any.whl", hash = "sha256:fcc46510fb75f8eba6df3bc8e84e4e902483d92be98075f20b9d160651a36d90", size = 16754, upload-time = "2025-09-08T08:10:55.92Z" },
 ]
 
 [[package]]
@@ -412,11 +412,11 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
-    { name = "check-jsonschema", specifier = "==0.33.3" },
+    { name = "check-jsonschema", specifier = "==0.34.0" },
     { name = "defusedxml", specifier = "==0.7.1" },
     { name = "playwright", specifier = "==1.55.0" },
     { name = "pytest", specifier = "==8.4.2" },
-    { name = "pytest-playwright", specifier = "==0.7.0" },
+    { name = "pytest-playwright", specifier = "==0.7.1" },
     { name = "pytest-rerunfailures", specifier = "==16.0.1" },
     { name = "requests", specifier = "==2.32.5" },
     { name = "ruff", specifier = "==0.13.1" },
