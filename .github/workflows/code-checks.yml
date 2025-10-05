@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  packages: read
+
 
 env:
   FORCE_COLOR: 1
@@ -20,10 +20,17 @@ jobs:
     name: Common Code Checks
     permissions:
       contents: read
+<<<<<<< HEAD
       actions: read
       pull-requests: write
       security-events: write
     uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@a5950751b77827654b888eb6b52a5c7fbca3e4fa # v2025.09.30.01
+=======
+      actions: read # Allow the workflow to read actions metadata
+      pull-requests: write # Allow the workflow to create and modify pull request comments
+      security-events: write # Allow the workflow to upload analysis results
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@e77e648233b977246ecdb30836e2360b33acd1d3 # v2025.09.16.01
+>>>>>>> dd2abaa (update)
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -31,7 +38,7 @@ jobs:
     name: CodeQL Analysis
     permissions:
       contents: read
-      security-events: write
+      security-events: write # Allow the workflow to upload analysis results
     strategy:
       matrix:
         language: [actions, typescript, python]
@@ -62,8 +69,7 @@ jobs:
     name: Run Python Scanner Lint Checks
     runs-on: ubuntu-latest
     permissions:
-      statuses: write
-      security-events: write
+      security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -121,9 +127,6 @@ jobs:
   run-python-scanner-dead-code-checks:
     name: Run Python Scanner Dead Code Checks
     runs-on: ubuntu-latest
-    permissions:
-      statuses: write
-      security-events: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -138,9 +141,6 @@ jobs:
   run-python-scanner-lockfile-check:
     name: Run Python Scanner Lockfile Check
     runs-on: ubuntu-latest
-    permissions:
-      statuses: write
-      security-events: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -156,8 +156,7 @@ jobs:
     name: Run Python Tests Lint Checks
     runs-on: ubuntu-latest
     permissions:
-      statuses: write
-      security-events: write
+      security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -215,9 +214,6 @@ jobs:
   run-python-tests-lockfile-check:
     name: Run Python Tests Lockfile Check
     runs-on: ubuntu-latest
-    permissions:
-      statuses: write
-      security-events: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -233,8 +229,7 @@ jobs:
     name: Run TypeScript Dashboard Code Checks
     runs-on: ubuntu-latest
     permissions:
-      statuses: write
-      security-events: write
+      security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -259,9 +254,6 @@ jobs:
   run-typescript-dashboard-format-checks:
     name: Run TypeScript Dashboard Format Checks
     runs-on: ubuntu-latest
-    permissions:
-      statuses: write
-      security-events: write
     steps:
       - name: Checkout Repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
