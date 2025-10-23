@@ -1,7 +1,7 @@
 [project]
 name = "scanner"
 dynamic = ["version"]
-requires-python = "~=3.13.0"
+requires-python = "~=3.14.0"
 dependencies = [
   "check-jsonschema==0.34.1",
   "defusedxml==0.7.1",
@@ -22,7 +22,7 @@ package = false
 py-modules = ["ui", "schema_validation"]
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py314"
 
 [tool.ruff.lint]
 extend-select = ["E501"]
