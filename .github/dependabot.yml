@@ -22,6 +22,8 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "uv"
     directories:
@@ -40,6 +42,8 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    cooldown:
+      default-days: 7
 
   - package-ecosystem: "npm"
     directory: "dashboard"
@@ -56,3 +60,5 @@ updates:
         update-types:
           - "patch"
           - "minor"
+    cooldown:
+      default-days: 7
