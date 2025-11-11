@@ -1,7 +1,7 @@
 [project]
 name = "scanner"
 dynamic = ["version"]
-requires-python = "~=3.13.0"
+requires-python = "~=3.14.0"
 dependencies = [
   "gitpython==3.1.45",
   "pydantic==2.11.9",
@@ -15,8 +15,8 @@ dependencies = [
 dev = [
   "pytest-cov==7.0.0",
   "pytest==8.4.2",
-  "ruff==0.13.1",
-  "ty==0.0.1a20",
+  "ruff==0.14.4",
+  "ty==0.0.1a25",
   "vulture==2.14",
 ]
 
