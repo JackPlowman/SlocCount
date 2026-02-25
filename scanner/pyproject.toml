@@ -3,20 +3,20 @@ name = "scanner"
 dynamic = ["version"]
 requires-python = "~=3.13.0"
 dependencies = [
-  "gitpython==3.1.45",
-  "pydantic==2.11.9",
+  "gitpython==3.1.46",
+  "pydantic==2.12.5",
   "pygithub==2.8.1",
-  "pygount==3.1.0",
+  "pygount==3.1.1",
   "python-dateutil==2.9.0",
-  "structlog==25.4.0",
+  "structlog==25.5.0",
 ]
 
 [project.optional-dependencies]
 dev = [
   "pytest-cov==7.0.0",
   "pytest==8.4.2",
-  "ruff==0.13.1",
-  "ty==0.0.1a20",
+  "ruff==0.15.1",
+  "ty==0.0.17",
   "vulture==2.14",
 ]
 
