@@ -43,8 +43,8 @@
     "vite": "7.1.12"
   },
   "engines": {
-    "npm": "10.9.2",
-    "node": "23.11.0"
+    "npm": "11.7.0",
+    "node": "v25.4.0"
   },
   "prettier": {
     "plugins": [
