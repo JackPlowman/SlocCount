@@ -5,11 +5,15 @@ runs:
   using: "composite"
   steps:
     - name: Install Python and UV
-      uses: astral-sh/setup-uv@fac544c07dec837d0ccb6301d7b5580bf5edae39 # v8.2.0
+      uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
       with:
+        version: "0.13.5"
+        python-version: "3.15.1"
         working-directory: "tests"
     - name: Set up Just
       uses: extractions/setup-just@53165ef7e734c5c07cb06b3c8e7b647c5aa16db3 # v4.0.0
+      with:
+        just-version: "1.59.0"
     - name: Install Python Dependencies
       shell: bash
       run: just tests::install

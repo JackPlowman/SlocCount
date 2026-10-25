@@ -26,7 +26,7 @@ jobs:
       actions: read # Allow the workflow to read actions metadata
       pull-requests: write # Allow the workflow to create and modify pull request comments
       security-events: write # Allow the workflow to upload analysis results
-    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@c0ea11ac152de03bcdc6415d89b51a178f68e754 # v2026.07.05.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/common-code-checks.yml@f82d61d53648ae90f8a0406c0f4bbf1aef332337 # v2026.10.25.01
     secrets:
       workflow_github_token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -38,7 +38,7 @@ jobs:
     strategy:
       matrix:
         language: [actions, typescript, python]
-    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@c0ea11ac152de03bcdc6415d89b51a178f68e754 # v2026.07.05.01
+    uses: JackPlowman/reusable-workflows/.github/workflows/codeql-analysis.yml@f82d61d53648ae90f8a0406c0f4bbf1aef332337 # v2026.10.25.01
     with:
       language: ${{ matrix.language }}
 
@@ -47,19 +47,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Scanner Dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Run Unit Tests
         run: just scanner::unit-test
       - name: SonarCloud Scan
-        uses: SonarSource/sonarqube-scan-action@713881670b6b3676cda39549040e2d88c70d582e # v8.2.0
+        uses: SonarSource/sonarqube-scan-action@d209202bc7d53ff1cc128f7f907dac145c9d6ae9 # v8.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # zizmor: ignore[secrets-outside-env] repository-scoped analysis token
 
   run-python-scanner-lint-checks:
     name: Run Python Scanner Lint Checks
@@ -68,12 +68,12 @@ jobs:
       security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Generate Ruff Sarif
         run: just scanner::ruff-lint-check
         env:
@@ -81,7 +81,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@54f647b7e1bb85c95cddabcd46b0c578ec92bc1a # v4.36.3
+        uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
           sarif_file: scanner/ruff-results.sarif
           wait-for-processing: true
@@ -95,12 +95,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check Python Code Format (Ruff)
         run: just scanner::ruff-format-check
         env:
@@ -111,12 +111,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check Python Code Types (ty) Checks
         run: just scanner::ty-check
 
@@ -125,12 +125,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check Python Code for Dead Code (Vulture)
         run: just scanner::vulture
 
@@ -139,12 +139,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-scanner-dependencies
+        uses: ./.github/actions/setup-scanner-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check UV Lockfile
         run: just scanner::uv-lock-check
 
@@ -155,12 +155,12 @@ jobs:
       security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-tests-dependencies
+        uses: ./.github/actions/setup-tests-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Generate Ruff Sarif
         run: just tests::ruff-lint-check
         env:
@@ -168,7 +168,7 @@ jobs:
           RUFF_OUTPUT_FILE: "ruff-results.sarif"
         continue-on-error: true
       - name: Upload Ruff analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@54f647b7e1bb85c95cddabcd46b0c578ec92bc1a # v4.36.3
+        uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
           sarif_file: tests/ruff-results.sarif
           wait-for-processing: true
@@ -182,12 +182,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-tests-dependencies
+        uses: ./.github/actions/setup-tests-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check Python Code Format (Ruff)
         run: just tests::ruff-format-check
         env:
@@ -198,12 +198,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-tests-dependencies
+        uses: ./.github/actions/setup-tests-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check Python Code Types (ty) Checks
         run: just tests::ty-check
 
@@ -212,12 +212,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Set up dependencies
-        uses: ./.github/actions/setup-tests-dependencies
+        uses: ./.github/actions/setup-tests-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Check UV Lockfile
         run: just tests::uv-lock-check
 
@@ -228,19 +228,19 @@ jobs:
       security-events: write # Allow the workflow to upload analysis results
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Dashboard Dependencies
-        uses: ./.github/actions/setup-dashboard-dependencies
+        uses: ./.github/actions/setup-dashboard-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Run ESLint
         env:
           SARIF_ESLINT_IGNORE_SUPPRESSED: "true"
         run: just dashboard::eslint-with-sarif
         continue-on-error: true
       - name: Upload analysis results to GitHub
-        uses: github/codeql-action/upload-sarif@54f647b7e1bb85c95cddabcd46b0c578ec92bc1a # v4.36.3
+        uses: github/codeql-action/upload-sarif@9b3254085494b55a0f7c4c2b3d2d52cc712ce370 # v4.39.1
         with:
           sarif_file: dashboard/eslint-results.sarif
           wait-for-processing: true
@@ -252,11 +252,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
       - name: Setup Dashboard Dependencies
-        uses: ./.github/actions/setup-dashboard-dependencies
+        uses: ./.github/actions/setup-dashboard-dependencies # zizmor: ignore[self-repository] required by actionlint v1.7.12
       - name: Run Prettier
         run: just dashboard::prettier-check

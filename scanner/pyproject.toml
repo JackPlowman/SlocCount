@@ -1,13 +1,13 @@
 [project]
 name = "scanner"
 dynamic = ["version"]
-requires-python = "~=3.14.0"
+requires-python = "~=3.15.0"
 dependencies = [
-  "gitpython==3.1.50",
-  "pydantic==2.13.4",
-  "pygithub==2.9.1",
+  "gitpython==3.2.1",
+  "pydantic==2.14.1",
+  "pygithub==2.10.0",
   "pygount==3.2.0",
-  "python-dateutil==2.9.0",
+  "python-dateutil==3.0.0",
   "structlog==26.1.0",
 ]
 
@@ -15,26 +15,27 @@ dependencies = [
 dev = [
   "pytest-cov==7.1.0",
   "pytest==9.1.1",
-  "ruff==0.15.20",
-  "ty==0.0.56",
+  "ruff==0.17.2",
+  "ty==0.0.91",
   "vulture==2.16",
 ]
 
 [tool.uv]
-required-version = "~=0.11.0"
+required-version = "~=0.13.0"
 package = false
 
 [tool.setuptools]
 py-modules = ["app", "cloned_repositories"]
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py315"
 
 [tool.ruff.lint]
 extend-select = ["E501"]
 select = ["ALL"]
 
 ignore = [
+  "CPY001",  # Copyright headers are not required by this project
   "COM812",  # Ignore due to conflict with Ruff formatter
   "ISC001",  # Ignore due to conflict with Ruff formatter
   "PLR2004", # Ignore magic value
