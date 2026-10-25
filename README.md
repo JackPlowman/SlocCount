@@ -1,6 +1,6 @@
 # Sloc Count
 
-![Development](https://img.shields.io/badge/Development-8A2BE2?style=for-the-badge&color=ff9500&label=Status)
+![Terminated](https://img.shields.io/badge/Terminated-8A2BE2?style=for-the-badge&color=ff0000&label=Status)
 
 Count the number of source lines of code (SLOC) in my projects. As well as a summary of the number of all projects.
 
