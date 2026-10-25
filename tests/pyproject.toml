@@ -1,34 +1,35 @@
 [project]
 name = "scanner"
 dynamic = ["version"]
-requires-python = "~=3.14.0"
+requires-python = "~=3.15.0"
 dependencies = [
-  "check-jsonschema==0.37.4",
+  "check-jsonschema==0.38.2",
   "defusedxml==0.7.1",
-  "playwright==1.61.0",
-  "pytest-playwright==0.8.0",
-  "pytest-rerunfailures==16.4",
+  "playwright==1.64.1",
+  "pytest-playwright==0.10.0",
+  "pytest-rerunfailures==16.7",
   "pytest==9.1.1",
   "requests==2.34.2",
-  "ruff==0.15.20",
-  "ty==0.0.56",
+  "ruff==0.17.2",
+  "ty==0.0.91",
 ]
 
 [tool.uv]
-required-version = "~=0.11.0"
+required-version = "~=0.13.0"
 package = false
 
 [tool.setuptools]
 py-modules = ["ui", "schema_validation"]
 
 [tool.ruff]
-target-version = "py313"
+target-version = "py315"
 
 [tool.ruff.lint]
 extend-select = ["E501"]
 select = ["ALL"]
 
 ignore = [
+  "CPY001",  # Copyright headers are not required by this project
   "COM812",  # Ignore due to conflict with Ruff formatter
   "ISC001",  # Ignore due to conflict with Ruff formatter
   "PLR2004", # Ignore magic value

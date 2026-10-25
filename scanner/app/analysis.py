@@ -7,9 +7,9 @@ from git import Repo
 from pygount import ProjectSummary, SourceAnalysis
 from structlog import get_logger, stdlib
 
-from .configuration import Configuration
 from .custom_types import AnalysedRepository, Commit, Summary
 from .github_interactions import clone_repo, retrieve_repositories
+lazy from .configuration import Configuration
 
 logger: stdlib.BoundLogger = get_logger()
 IGNORE_FOLDERS = [".git"]
